@@ -1,14 +1,12 @@
 <template>
-  <p :class="pClass">
-    <slot> </slot>
-  </p>
+  <hr :class="hrLineClass" />
 </template>
 
 <script setup>
 defineProps({
-  pClass: {
+  hrLineClass: {
     type: String,
-    required: true
+    default: ''
   }
 })
 </script>

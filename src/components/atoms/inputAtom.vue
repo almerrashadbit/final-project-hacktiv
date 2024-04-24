@@ -5,6 +5,7 @@
     :class="inputClass"
     :id="id"
     :placeholder="placeholder"
+    :aria-label="ariaLabelInput"
     @input="$emit('input', $event.target.value)"
   />
 </template>
@@ -16,8 +17,7 @@ defineProps({
     required: true
   },
   id: {
-    type: String,
-    required: true
+    type: String
   },
   placeholder: {
     type: String,
@@ -28,8 +28,10 @@ defineProps({
     required: true
   },
   value: {
-    type: String,
-    default: ''
+    type: String
+  },
+  ariaLabelInput: {
+    type: String
   }
 })
 </script>

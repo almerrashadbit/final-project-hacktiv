@@ -16,8 +16,6 @@ import buttonAtom from './components/atoms/buttonAtom.vue'
   </header> -->
 
   <RouterView />
-
-
 </template>
 
 <style scoped></style>

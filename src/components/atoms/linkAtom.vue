@@ -5,16 +5,14 @@
 <script setup>
 defineProps({
   linkClass: {
-    type: String,
-    default: ''
+    type: String
   },
   href: {
     type: String,
     required: true
   },
   role: {
-    type: String,
-    default: ''
+    type: String
   }
 })
 </script>

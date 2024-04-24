@@ -1,5 +1,5 @@
 <template>
-  <img src="{{ imgSrc }}" class="{{ imgClass }}" alt="{{ imgAlt }}" />
+  <img :src="imgSrc" :class="imgClass" :alt="imgAlt" />
 </template>
 
 <script setup>

@@ -1,27 +1,29 @@
 <template>
-  <div :class="inputTypeClass">
+  <form class="d-flex" role="search">
     <inputAtom
       :inputClass="inputClass"
       :id="id"
       :placeholder="placeholder"
       :value="value"
       :type="type"
+      :ariaLabelInput="ariaLabelInput"
       @input="$emit('input', $event.target.value)"
     />
-    <labelAtom :labelFor="id">
-      <slot></slot>
-    </labelAtom>
-  </div>
+    <buttonAtom type="submit" :classButton="classButton"><slot></slot></buttonAtom>
+  </form>
 </template>
 
 <script setup>
 import inputAtom from '../atoms/inputAtom.vue'
-import labelAtom from '../atoms/labelAtom.vue'
+import buttonAtom from '../atoms/buttonAtom.vue'
 
 defineProps({
-  id: {
+  inputClass: {
     type: String,
     required: true
+  },
+  id: {
+    type: String
   },
   placeholder: {
     type: String,
@@ -34,13 +36,13 @@ defineProps({
     type: String,
     required: true
   },
-  inputClass: {
+  classButton: {
     type: String,
     required: true
   },
-  inputTypeClass: {
+  ariaLabelInput: {
     type: String,
-    required: true
+    default: ''
   }
 })
 </script>

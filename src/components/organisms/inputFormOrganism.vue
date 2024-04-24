@@ -16,11 +16,15 @@
       </floatingInputMolecule>
     </div>
     <div class="d-grid mb-4 text-center">
-    <buttonAtom type="submit" :classButton="classButton">{{ btnFormSubmit }}</buttonAtom>
-  </div>
-  <hr v-if="linkForm">
+      <buttonAtom type="submit" :classButton="buttonForm.classButton">{{
+        buttonForm.text
+      }}</buttonAtom>
+    </div>
+    <horizontalLineAtom v-if="linkForm" :hrLineClass="hrLineClass" />
     <div class="mb-4 text-center" v-for="linkk in linkForm">
-      <linkAtom :href="linkk.href" :linkClass="linkk.formLinkClass" :role="linkk.role">{{ linkk.formLinkText }}</linkAtom>
+      <linkAtom :href="linkk.href" :linkClass="linkk.formLinkClass" :role="linkk.role">{{
+        linkk.formLinkText
+      }}</linkAtom>
     </div>
   </form>
 </template>
@@ -29,12 +33,9 @@
 import floatingInputMolecule from '../molecules/floatingInputMolecule.vue'
 import buttonAtom from '../atoms/buttonAtom.vue'
 import linkAtom from '../atoms/linkAtom.vue'
+import horizontalLineAtom from '../atoms/horizontalLineAtom.vue'
 
 defineProps({
-  btnFormSubmit: {
-    type: String,
-    required: true
-  },
   inputItems: {
     type: Array,
     required: true
@@ -43,8 +44,11 @@ defineProps({
     type: Array,
     required: true
   },
-  classButton: {
-    type: String,
+  hrLineClass: {
+    type: String
+  },
+  buttonForm: {
+    type: Object,
     required: true
   }
 })
