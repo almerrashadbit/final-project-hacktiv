@@ -1,25 +1,24 @@
 <template>
   <input
-    :value="value"
-    :type="type"
+    :type="inputType"
     :class="inputClass"
-    :id="id"
-    :placeholder="placeholder"
-    :aria-label="ariaLabelInput"
-    @input="$emit('input', $event.target.value)"
+    :id="inputId"
+    :placeholder="inputPlaceholder"
+    :aria-label="inputAriaLabel"
+    v-model="inputValue"
   />
 </template>
 
 <script setup>
 defineProps({
-  type: {
+  inputType: {
     type: String,
     required: true
   },
-  id: {
+  inputId: {
     type: String
   },
-  placeholder: {
+  inputPlaceholder: {
     type: String,
     required: true
   },
@@ -27,11 +26,10 @@ defineProps({
     type: String,
     required: true
   },
-  value: {
-    type: String
-  },
-  ariaLabelInput: {
+  inputAriaLabel: {
     type: String
   }
 })
+
+const inputValue = defineModel()
 </script>

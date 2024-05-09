@@ -1,10 +1,15 @@
 <template>
   <ul :class="unorderedClass">
-    <li v-for="linkk in linkForm" :class="linkk.listClass">
-      <linkAtom :href="linkk.href" :linkClass="linkk.formLinkClass" :role="linkk.role">{{
-        linkk.linkText
-      }}</linkAtom>
+    <li v-if="unorderedIsLink" v-for="linkk in unorderedList" :class="linkk.listClass">
+      <linkAtom
+        :linkHref="linkk.linkHref"
+        :linkClass="linkk.linkClass"
+        :linkRole="linkk.linkRole"
+        :linkAriaCurrent="linkk.linkAriaCurrent"
+        >{{ linkk.linkText }}</linkAtom
+      >
     </li>
+    <li v-else v-for="linkk in unorderedList" class="list-group-item">{{ linkk }}</li>
     <slot></slot>
   </ul>
 </template>
@@ -17,8 +22,12 @@ defineProps({
     type: String,
     required: true
   },
-  linkForm: {
+  unorderedList: {
     type: Array,
+    required: true
+  },
+  unorderedIsLink: {
+    type: Boolean,
     required: true
   }
 })

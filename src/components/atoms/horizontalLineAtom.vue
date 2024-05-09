@@ -1,12 +1,11 @@
 <template>
-  <hr :class="hrLineClass" />
+  <hr :class="hrClass" />
 </template>
 
 <script setup>
 defineProps({
-  hrLineClass: {
-    type: String,
-    default: ''
+  hrClass: {
+    type: String
   }
 })
 </script>

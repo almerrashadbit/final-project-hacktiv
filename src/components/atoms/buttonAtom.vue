@@ -1,49 +1,40 @@
 <template>
   <button
-    :type="type"
-    :class="classButton"
-    :data-bs-toggle="dataBsToggle"
-    :data-bs-target="dataBsTarget"
-    :aria-label="ariaLabel"
-    :aria-expanded="ariaExpanded"
-    :aria-controls="ariaControls"
-    @click="handleClick"
+    :type="buttonType"
+    :class="buttonClass"
+    :data-bs-toggle="buttonDataBsToggle"
+    :data-bs-target="buttonDataBsTarget"
+    :aria-label="buttonAriaLabel"
+    :aria-expanded="buttonAriaExpanded"
+    :aria-controls="buttonAriaControls"
   >
-    <slot> Button </slot>
+    <slot></slot>
   </button>
 </template>
 
 <script setup>
 defineProps({
-  btnClass: {
-    type: String
-  },
-  classButton: {
+  buttonClass: {
     type: String,
     required: true
   },
-  dataBsTarget: {
+  buttonType: {
     type: String
   },
-  dataBsToggle: {
+  buttonDataBsTarget: {
     type: String
   },
-  ariaLabel: {
+  buttonDataBsToggle: {
     type: String
   },
-  ariaExpanded: {
+  buttonAriaLabel: {
     type: String
   },
-  ariaControls: {
+  buttonAriaExpanded: {
+    type: String
+  },
+  buttonAriaControls: {
     type: String
   }
 })
-
-function handleClick(event) {
-  /**
-   * Click event
-   * @type {Event}
-   */
-  this.$emit('click', event)
-}
 </script>

@@ -1,17 +1,15 @@
 <template>
-  <div :class="inputTypeClass">
-    <inputAtom
-      :inputClass="inputClass"
-      :id="id"
-      :placeholder="placeholder"
-      :value="value"
-      :type="type"
-      @input="$emit('input', $event.target.value)"
-    />
-    <labelAtom :labelFor="id">
-      <slot></slot>
-    </labelAtom>
-  </div>
+  <inputAtom
+    :input-class="floatingInputClass"
+    :input-id="floatingInputId"
+    :input-placeholder="floatingInputPlaceholder"
+    :input-type="floatingInputType"
+    :input-aria-label="floatingInputAriaLabel"
+    v-model="floatingInputValue"
+  />
+  <labelAtom :label-for="floatingInputId" :label-class="floatingLabelClass">
+    <slot></slot>
+  </labelAtom>
 </template>
 
 <script setup>
@@ -19,28 +17,28 @@ import inputAtom from '../atoms/inputAtom.vue'
 import labelAtom from '../atoms/labelAtom.vue'
 
 defineProps({
-  id: {
+  floatingInputId: {
     type: String,
     required: true
   },
-  placeholder: {
+  floatingInputPlaceholder: {
+    type: String,
+    default: 'Default'
+  },
+  floatingInputType: {
     type: String,
     required: true
   },
-  value: {
+  floatingInputAriaLabel: {
     type: String
   },
-  type: {
-    type: String,
-    required: true
+  floatingInputClass: {
+    type: String
   },
-  inputClass: {
-    type: String,
-    required: true
-  },
-  inputTypeClass: {
-    type: String,
-    required: true
+  floatingLabelClass: {
+    type: String
   }
 })
+
+const floatingInputValue = defineModel()
 </script>

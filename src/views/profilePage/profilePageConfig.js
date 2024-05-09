@@ -1,4 +1,23 @@
 const config = {
+  imageObject: {
+    imgSrc: 'https://picsum.photos/200',
+    imgAlt: 'Testing',
+    imgClass: 'img-thumbnail mb-4'
+  },
+  linkList: [
+    {
+      href: '#',
+      class: 'btn btn-success',
+      linkText: 'Edit',
+      role: 'button'
+    }
+  ],
+  linkForm: ['Testing', 'Testing', 'Testing', 'Testing'],
+  link: {
+    href: '#',
+    linkClass: 'navbar-brand',
+    formLinkText: 'Patient Care'
+  },
   headerUnordered: {
     linkForm: [
       {

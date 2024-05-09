@@ -1,13 +1,13 @@
 <template>
   <div class="card text-center h-100">
-    <imageAtom :imgSrc="imgSrc" :imgClass="imgClass" :imgAlt="imgAlt" />
+    <imageAtom :img-src="cardImgSrc" img-class="card-img-top" :img-alt="cardImgAlt" />
     <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <paragraphAtom :pClass="pClass">{{ pText }}</paragraphAtom>
+      <h5 class="card-title">{{ cardHeader }}</h5>
+      <paragraphAtom p-class="card-text">{{ cardPText }}</paragraphAtom>
     </div>
     <div class="card-footer">
-      <linkAtom linkClass="btn btn-primary" :href="href">{{ linkText }}</linkAtom>
-      </div>
+      <linkAtom link-class="btn btn-primary" :link-href="cardLinkHref">{{ cardLinkText }}</linkAtom>
+    </div>
   </div>
 </template>
 
@@ -17,28 +17,25 @@ import linkAtom from '../atoms/linkAtom.vue'
 import imageAtom from '../atoms/imageAtom.vue'
 
 defineProps({
-  imgSrc: {
+  cardImgSrc: {
     type: String,
     requred: true
   },
-  imgClass: {
-    type: String,
-  },
-  imgAlt: {
-    type: String,
-  },
-  pClass: {
-    type: String,
-    required: true
-  },
-  href: {
+  cardImgAlt: {
     type: String
   },
-  linkText: {
+  cardLinkHref: {
+    type: String
+  },
+  cardLinkText: {
     type: String,
     required: true
   },
-  pText: {
+  cardPText: {
+    type: String,
+    required: true
+  },
+  cardHeader: {
     type: String,
     required: true
   }

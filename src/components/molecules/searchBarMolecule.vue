@@ -1,15 +1,14 @@
 <template>
   <form class="d-flex" role="search">
     <inputAtom
-      :inputClass="inputClass"
-      :id="id"
-      :placeholder="placeholder"
-      :value="value"
-      :type="type"
-      :ariaLabelInput="ariaLabelInput"
+      input-class="form-control me-2"
+      :input-placeholder="searchInputPlaceholder"
+      :input-value="searchInputValue"
+      input-type="search"
+      input-aria-label="Search"
       @input="$emit('input', $event.target.value)"
     />
-    <buttonAtom type="submit" :classButton="classButton"><slot></slot></buttonAtom>
+    <buttonAtom button-type="submit" button-class="btn btn-outline-light"><slot></slot></buttonAtom>
   </form>
 </template>
 
@@ -18,31 +17,12 @@ import inputAtom from '../atoms/inputAtom.vue'
 import buttonAtom from '../atoms/buttonAtom.vue'
 
 defineProps({
-  inputClass: {
+  searchInputPlaceholder: {
     type: String,
     required: true
   },
-  id: {
+  searchInputValue: {
     type: String
-  },
-  placeholder: {
-    type: String,
-    required: true
-  },
-  value: {
-    type: String
-  },
-  type: {
-    type: String,
-    required: true
-  },
-  classButton: {
-    type: String,
-    required: true
-  },
-  ariaLabelInput: {
-    type: String,
-    default: ''
   }
 })
 </script>

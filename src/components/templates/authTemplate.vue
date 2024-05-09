@@ -1,12 +1,15 @@
 <template>
   <div class="container-fluid py-4">
-    <div class="row justify-content-center">
-      <div class="col-11 col-lg-6 bg-info rounded p-4">
+    <div class="row justify-content-evenly align-items-center">
+      <div class="col-11 col-lg-5 rounded text-center text-white">
+        <h1>Welcome to Patient Care Website</h1>
+        <p>A doctor appointment website</p>
+      </div>
+      <div class="col-11 col-lg-5 bg-light rounded p-3">
         <inputForm
-          :inputItems="inputItems"
-          :linkForm="linkForm"
-          :hrLineClass="hrLineClass"
-          :buttonForm="buttonForm"
+          :inputFormFloatingInput="inputFormFloatingInput"
+          :inputFormLink="inputFormLink"
+          :inputFormButton="inputFormButton"
           ><slot></slot
         ></inputForm>
       </div>
@@ -18,20 +21,17 @@
 import inputForm from '../organisms/inputFormOrganism.vue'
 
 defineProps({
-  inputItems: {
+  inputFormFloatingInput: {
     type: Array,
     required: true
   },
-  linkForm: {
+  inputFormLink: {
     type: Array,
     required: true
   },
-  buttonForm: {
+  inputFormButton: {
     type: Object,
     required: true
-  },
-  hrLineClass: {
-    type: String
   }
 })
 </script>
