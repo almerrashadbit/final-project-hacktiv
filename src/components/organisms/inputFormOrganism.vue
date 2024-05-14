@@ -1,5 +1,5 @@
 <template>
-  <form class="form-signin" @submit.prevent="handleSubmit">
+  <form class="form-signin" @submit.prevent="$emit('handleSubmitInputForm')">
     <div class="mb-4">
       <slot></slot>
     </div>
@@ -33,10 +33,9 @@ import floatingInputMolecule from '../molecules/floatingInputMolecule.vue'
 import buttonAtom from '../atoms/buttonAtom.vue'
 import linkAtom from '../atoms/linkAtom.vue'
 import horizontalLineAtom from '../atoms/horizontalLineAtom.vue'
-import axios from 'axios'
-import { ref } from 'vue'
+import { authStore } from '@/stores/authStores'
 
-const inputFormValue = ref([])
+const inputFormValue = defineModel({ type: Array })
 
 defineProps({
   inputFormFloatingInput: {
@@ -56,19 +55,20 @@ defineProps({
   }
 })
 
-function handleSubmit() {
-  const params = {
-    emailOrUsername: inputFormValue.value[0],
-    password: inputFormValue.value[1]
-  }
+async function handleSubmit() {
+  try {
+    const params = {
+      emailOrUsername: inputFormValue.value[0],
+      password: inputFormValue.value[1]
+    }
 
-  axios
-    .post('http://127.0.0.1:3000/api/users/login', params)
-    .then(function (response) {
-      console.log(response, params)
-    })
-    .catch(function (error) {
-      console.log(error, params)
-    })
+    const useAuthStore = authStore()
+
+    const res = await useAuthStore.login(params)
+
+    console.log(res)
+  } catch (error) {
+    console.log(error)
+  }
 }
 </script>

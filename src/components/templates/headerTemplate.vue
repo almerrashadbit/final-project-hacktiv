@@ -25,7 +25,7 @@
   <div class="container-fluid bg-success bg-gradient py-4">
     <div class="row justify-content-center">
       <div class="col-10 rounded p-4">
-        <listOrganism :cardList="cardList" />
+        <listOrganism :card-list="cardList" />
       </div>
     </div>
     <div class="row justify-content-center">

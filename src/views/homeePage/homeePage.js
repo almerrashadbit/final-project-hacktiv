@@ -26,5 +26,3 @@ const config = {
   },
   isSearchBar: true
 }
-
-export default config

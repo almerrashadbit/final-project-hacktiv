@@ -1,6 +1,6 @@
 export default {
-    DOCTOR: '/doctor',
-    APPOINTMENT: '/appointment',
-    USERS: '/users',
-  };
-  
+  DOCTOR: '/doctors',
+  APPOINTMENT: '/appointment',
+  LOGIN: '/users/login',
+  REGISTER: '/users/register'
+}

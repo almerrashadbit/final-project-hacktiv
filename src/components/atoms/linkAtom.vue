@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="linkHref" :class="linkClass" :role="linkRole" :aria-current="linkAriaCurrent"
+  <router-link :to="linkHref" :class="linkClass" :role="linkRole" :aria-current="linkAriaCurrent" :data-bs-dismiss="dataBsDismiss"
     ><slot></slot
   ></router-link>
 </template>
@@ -18,6 +18,9 @@ defineProps({
   },
   linkAriaCurrent: {
     type: String
-  }
+  },
+  dataBsDismiss: {
+    type: String
+  },
 })
 </script>

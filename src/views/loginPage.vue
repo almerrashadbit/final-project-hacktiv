@@ -3,14 +3,32 @@
     :inputFormFloatingInput="inputFormFloatingInput"
     :inputFormLink="inputFormLink"
     :inputFormButton="inputFormButton"
+    :modalObject="modalObject"
+    @handleSubmitInputForm.once="handleSubmitInputForm"
+    v-model="inputFormModel"
   >
     <h3>Sign into your account</h3>
   </authTemplate>
 </template>
 
 <script setup>
+import { authStore } from '@/stores/authStores'
 import authTemplate from '../components/templates/authTemplate.vue'
-import { onBeforeMount, onBeforeUpdate } from 'vue'
+import { onBeforeMount, onBeforeUpdate, ref, reactive } from 'vue'
+import { Modal } from 'bootstrap';
+
+const inputFormModel = ref([])
+const modalObject = ref({
+  text: 'Success',
+  modalHeaderText: 'Success',
+  modalLink: [
+    {
+      href: '#',
+      class: 'btn btn-success',
+      text: 'Continue'
+    }
+  ]
+})
 
 const inputFormFloatingInput = [
   {
@@ -61,6 +79,23 @@ const inputFormLink = [
 const inputFormButton = {
   text: 'Login',
   classButton: 'btn btn-success btn-block btn-lg'
+}
+
+async function handleSubmitInputForm() {
+  try {
+    const params = {
+      emailOrUsername: inputFormModel.value[0],
+      password: inputFormModel.value[1]
+    };
+
+    const useAuthStore = authStore();
+
+    modalObject.value = await useAuthStore.login(params);
+    const myModal = new Modal(document.getElementById('staticBackdrop'));
+    myModal.show();
+  } catch (error) {
+    console.log(error)
+  }
 }
 </script>
 

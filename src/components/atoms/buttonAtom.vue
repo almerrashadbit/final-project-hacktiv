@@ -4,6 +4,7 @@
     :class="buttonClass"
     :data-bs-toggle="buttonDataBsToggle"
     :data-bs-target="buttonDataBsTarget"
+    :data-bs-dismiss="buttonDataBsDismiss"
     :aria-label="buttonAriaLabel"
     :aria-expanded="buttonAriaExpanded"
     :aria-controls="buttonAriaControls"
@@ -34,6 +35,9 @@ defineProps({
     type: String
   },
   buttonAriaControls: {
+    type: String
+  },
+  buttonDataBsDismiss: {
     type: String
   }
 })
