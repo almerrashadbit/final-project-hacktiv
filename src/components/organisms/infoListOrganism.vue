@@ -1,17 +1,17 @@
 <template>
-  <div class="container p-5">
-    <div class="row justify-content-between">
-      <div class="col-12 col-md-2">
+  <div class="container p-5 mt-5">
+    <div class="row justify-content-evenly">
+      <div class="col-8 col-md-8 col-lg-8 col-xl-3">
         <div class="row">
           <imageAtom
-            :img-src="imageObject.imgSrc"
-            :img-class="imageObject.imgClass"
-            :img-alt="imageObject.imgAlt"
+            :img-src="infoImg.imgSrc"
+            :img-class="infoImg.imgClass"
+            :img-alt="infoImg.imgAlt"
           />
         </div>
         <div class="row">
           <linkAtom
-            v-for="linkk in linkList"
+            v-for="linkk in infoLink"
             :link-class="linkk.class"
             :link-href="linkk.href"
             :link-role="linkk.role"
@@ -19,10 +19,10 @@
           >
         </div>
       </div>
-      <div class="col-12 col-md-8">
+      <div class="col-12 col-md-12 col-lg-12 col-xl-7 mt-3">
         <unorderedLinkMolecule
           unordered-class="list-group"
-          :unordered-list="linkForm"
+          :unordered-list="infoList"
           :unordered-is-link="false"
         />
       </div>
@@ -36,16 +36,16 @@ import linkAtom from '../atoms/linkAtom.vue'
 import imageAtom from '../atoms/imageAtom.vue'
 
 defineProps({
-  imageObject: {
+  infoImg: {
     type: Object,
     required: true
   },
-  linkList: {
+  infoLink: {
     type: Array,
     required: true
   },
 
-  linkForm: {
+  infoList: {
     type: Array,
     required: true
   }

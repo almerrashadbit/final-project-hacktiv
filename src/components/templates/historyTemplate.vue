@@ -1,15 +1,14 @@
 <template>
-  <!-- <header>
-    <headerOrganism :link="link" :unordered="unordered" :searchBar="searchBar" />
-  </header> -->
+  <headerOrganism :header-unordered="headerUnordered" />
+
   <div class="container-fluid">
     <div class="row justify-content-center">
       <div class="col-11">
         <accordionMolecule v-for="listt in listItems" :accordion-button-text="listt.header">
           <InfoListOrganism
             :imageObject="listt.imageObject"
-            :linkForm="listt.linkForm"
-            :linkList="button"
+            :infoList="listt.linkForm"
+            :infoLink="button"
           />
         </accordionMolecule>
       </div>
@@ -19,6 +18,7 @@
 
 <script setup>
 import accordionMolecule from '../molecules/accordionMolecule.vue'
+import headerOrganism from '../organisms/headerOrganism.vue'
 import InfoListOrganism from '../organisms/infoListOrganism.vue'
 
 const button = [
@@ -39,6 +39,10 @@ const button = [
 defineProps({
   listItems: {
     type: Array,
+    required: true
+  },
+  headerUnordered: {
+    type: Object,
     required: true
   }
 })

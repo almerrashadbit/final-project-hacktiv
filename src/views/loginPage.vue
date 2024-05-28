@@ -14,8 +14,8 @@
 <script setup>
 import { authStore } from '@/stores/authStores'
 import authTemplate from '../components/templates/authTemplate.vue'
-import { onBeforeMount, onBeforeUpdate, ref, reactive } from 'vue'
-import { Modal } from 'bootstrap';
+import { ref } from 'vue'
+import { Modal } from 'bootstrap'
 
 const inputFormModel = ref([])
 const modalObject = ref({
@@ -86,13 +86,13 @@ async function handleSubmitInputForm() {
     const params = {
       emailOrUsername: inputFormModel.value[0],
       password: inputFormModel.value[1]
-    };
+    }
 
-    const useAuthStore = authStore();
+    const useAuthStore = authStore()
 
-    modalObject.value = await useAuthStore.login(params);
-    const myModal = new Modal(document.getElementById('staticBackdrop'));
-    myModal.show();
+    modalObject.value = await useAuthStore.login(params, inputFormModel.value[2])
+    const myModal = new Modal(document.getElementById('staticBackdrop'))
+    myModal.show()
   } catch (error) {
     console.log(error)
   }

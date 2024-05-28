@@ -1,13 +1,17 @@
 import config from '@/configs/env.config'
 
-export function getToken() {
-  return window.localStorage.getItem(config.idTokenKey)
+export function getToken(key) {
+  return window.localStorage.getItem(key)
 }
 
-export function saveToken(token) {
-  window.localStorage.setItem(config.idTokenKey, token)
+export function saveToken(key, token) {
+  window.localStorage.setItem(key, token)
 }
 
-export function destroyToken() {
-  window.localStorage.removeItem(config.idTokenKey)
+export function destroyToken(key) {
+  window.localStorage.removeItem(key)
+}
+
+export function clearToken() {
+  window.localStorage.clear()
 }

@@ -10,14 +10,24 @@
         :floating-input-type="inputt.type"
         :floating-input-class="inputt.inputClass"
         :floating-label-class="inputt.labelClass"
+        :floating-input-list="inputt.list"
+        :floating-input-select-list="inputt.selectList"
         v-model="inputFormValue[index]"
         >{{ inputt.label }}
       </floatingInputMolecule>
+      <datalistAtom
+        v-if="inputt.list"
+        :datalist-id="inputt.list"
+        :option-list="inputt.datalist"
+      ></datalistAtom>
     </div>
     <div class="d-grid mb-4 text-center">
-      <buttonAtom type="submit" :button-class="inputFormButton.classButton">{{
-        inputFormButton.text
-      }}</buttonAtom>
+      <buttonAtom
+        v-if="inputFormButton"
+        type="submit"
+        :button-class="inputFormButton.classButton"
+        >{{ inputFormButton.text }}</buttonAtom
+      >
     </div>
     <horizontalLineAtom v-if="inputFormLink" hr-class="border border-dark border-1" />
     <div class="mb-4 text-center" v-for="linkk in inputFormLink">
@@ -34,6 +44,7 @@ import buttonAtom from '../atoms/buttonAtom.vue'
 import linkAtom from '../atoms/linkAtom.vue'
 import horizontalLineAtom from '../atoms/horizontalLineAtom.vue'
 import { authStore } from '@/stores/authStores'
+import datalistAtom from '../atoms/datalistAtom.vue'
 
 const inputFormValue = defineModel({ type: Array })
 
@@ -50,8 +61,7 @@ defineProps({
     type: String
   },
   inputFormButton: {
-    type: Object,
-    required: true
+    type: Object
   }
 })
 

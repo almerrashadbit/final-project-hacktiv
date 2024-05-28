@@ -5,6 +5,7 @@
     :id="inputId"
     :placeholder="inputPlaceholder"
     :aria-label="inputAriaLabel"
+    :list="inputList"
     v-model="inputValue"
   />
 </template>
@@ -27,6 +28,9 @@ defineProps({
     required: true
   },
   inputAriaLabel: {
+    type: String
+  },
+  inputList: {
     type: String
   }
 })

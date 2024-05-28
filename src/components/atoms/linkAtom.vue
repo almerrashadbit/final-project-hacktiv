@@ -1,5 +1,11 @@
 <template>
-  <router-link :to="linkHref" :class="linkClass" :role="linkRole" :aria-current="linkAriaCurrent" :data-bs-dismiss="dataBsDismiss"
+  <router-link
+    :to="linkHref"
+    :class="linkClass"
+    :role="linkRole"
+    :aria-current="linkAriaCurrent"
+    :data-bs-dismiss="dataBsDismiss"
+    :id="linkId"
     ><slot></slot
   ></router-link>
 </template>
@@ -10,7 +16,6 @@ defineProps({
     type: String
   },
   linkHref: {
-    type: String,
     required: true
   },
   linkRole: {
@@ -22,5 +27,8 @@ defineProps({
   dataBsDismiss: {
     type: String
   },
+  linkId: {
+    type: String
+  }
 })
 </script>

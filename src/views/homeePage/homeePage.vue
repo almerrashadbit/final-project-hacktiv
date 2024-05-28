@@ -4,15 +4,22 @@
     :isSearchBar="homeePage.isSearchBar"
     :cardList="cardList"
     :unorderedPagination="unorderedPagination"
+    v-model="searchBarValue"
   />
 </template>
 
 <script setup>
-import { onBeforeMount } from 'vue';
+import { onBeforeMount, onMounted, ref, watch } from 'vue'
 import headerTemplate from '../../components/templates/headerTemplate.vue'
-import cardList from './cardList'
-import unorderedPagination from './unorderedPagination'
 import { doctorStore } from '@/stores/doctorStores'
+import { authStore } from '@/stores/authStores'
+import { onBeforeRouteUpdate, useRoute } from 'vue-router'
+import router from '@/router/index'
+
+const unorderedPagination = ref({})
+const cardList = ref([])
+const searchBarValue = ref()
+const route = useRoute()
 
 const homeePage = {
   headerUnordered: {
@@ -25,34 +32,76 @@ const homeePage = {
         linkAriaCurrent: 'page'
       },
       {
-        linkHref: '/profile',
+        linkHref: '/appointment',
         linkClass: 'nav-link',
-        linkText: 'Profile',
+        linkText: 'New Appointment',
         listClass: 'nav-item'
       }
     ],
     unorderedDropdownClass: 'dropdown-menu',
     dropdownLinkForm: [
       {
+        linkHref: '/history',
+        linkClass: 'dropdown-item',
+        linkText: 'View/Edit Appointment'
+      },
+      {
         linkHref: '/',
         linkClass: 'dropdown-item',
-        linkText: 'Profile'
+        linkText: 'Logout',
+        linkId: 'logoutlink'
       }
     ]
-  },
-  isSearchBar: true
+  }
 }
+
+async function getDoctorData(page, nameQuery = null) {
+  try {
+    const useDoctorStore = doctorStore()
+
+    const res = await useDoctorStore.getDoctor(page, nameQuery)
+    if (!res) {
+      unorderedPagination.value = useDoctorStore.paginationObjectGetter
+      cardList.value = useDoctorStore.doctorStoresGetter
+      return null
+    }
+    const myModal = new Modal(document.getElementById('staticBackdrop'))
+    myModal.show()
+  } catch (error) {}
+}
+
+watch(searchBarValue, async (newValue) => {
+  try {
+    console.log('WATCHEFRD')
+
+    router.replace({
+      query: {
+        pageId: 1
+      }
+    })
+
+    await getDoctorData(1, newValue)
+  } catch (error) {}
+})
+
+onBeforeRouteUpdate(async (to, from) => {
+  try {
+    await getDoctorData(to.query.pageId, searchBarValue.value)
+  } catch (error) {}
+})
 
 onBeforeMount(async () => {
   try {
-    const useDoctorStore = doctorStore();
-
-    useDoctorStore.getDoctor();
-  } catch (error) {
-    
-  }
+    await getDoctorData(1)
+  } catch (error) {}
 })
 
+onMounted(() => {
+  document.getElementById('logoutlink').addEventListener('click', () => {
+    const useAuthStore = authStore()
+    useAuthStore.logout()
+  })
+})
 </script>
 
 <style>

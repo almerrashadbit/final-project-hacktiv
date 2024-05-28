@@ -26,26 +26,41 @@ const router = createRouter({
       path: '/profile',
       name: 'Profile Page',
       component: () => import('../views/profilePage/profilePage.vue'),
-      meta: { requiresAuth: true }
+      meta: { requiresAuth: true },
+      children: [
+        {
+          path: 'doctor/:id',
+          name: 'Doctor Profile',
+          component: () => import('../views/profilePage/profilePage.vue'),
+          meta: { requiresAuth: true }
+        }
+      ]
     },
     {
       path: '/history',
       name: 'History Page',
       component: () => import('../views/historyPage/historyPage.vue'),
       meta: { requiresAuth: true }
+    },
+    {
+      path: '/appointment',
+      name: 'Appointment Page',
+      component: () => import('../views/appointmentPage.vue'),
+      meta: { requiresAuth: true }
     }
   ]
 })
 
-router.beforeEach(async (to, from) => {
+router.beforeEach((to, from) => {
   const useAuthStore = authStore()
 
   const res = () => {
     if (!useAuthStore.cacheCheckedGetter) {
       const res = useAuthStore.checkCache()
+      console.log(res)
       return res
     }
-    return true;
+    return useAuthStore.tokenGetter
   }
 
   if (to.meta.requiresAuth && !res()) {
@@ -54,7 +69,10 @@ router.beforeEach(async (to, from) => {
     }
   } else if (!to.meta.requiresAuth && res()) {
     return {
-      path: '/home'
+      path: '/home',
+      query: {
+        pageId: 1
+      }
     }
   }
 })

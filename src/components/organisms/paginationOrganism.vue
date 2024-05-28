@@ -1,9 +1,9 @@
 <template>
-  <nav aria-label="Page navigation example">
+  <nav v-if="unorderedPagination" aria-label="Page navigation example">
     <UnorderedLinkMolecule
       unorderedClass="pagination justify-content-center"
-      :linkForm="unorderedPagination"
-      :isLink="true"
+      :unorderedList="unorderedPagination"
+      :unorderedIsLink="true"
     />
   </nav>
 </template>

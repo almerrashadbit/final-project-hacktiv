@@ -6,9 +6,7 @@ import router from './router'
 
 // Import Bootstrap and BootstrapVue CSS files (order is important)
 import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
 import 'bootstrap/dist/js/bootstrap.js'
-// import 'bootstrap-vue/dist/bootstrap-vue.js'
 
 const app = createApp(App)
 

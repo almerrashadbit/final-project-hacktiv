@@ -18,8 +18,7 @@ import imageAtom from '../atoms/imageAtom.vue'
 
 defineProps({
   cardImgSrc: {
-    type: String,
-    requred: true
+    type: String
   },
   cardImgAlt: {
     type: String
@@ -28,16 +27,13 @@ defineProps({
     type: String
   },
   cardLinkText: {
-    type: String,
-    required: true
+    type: String
   },
   cardPText: {
-    type: String,
-    required: true
+    type: String
   },
   cardHeader: {
-    type: String,
-    required: true
+    type: String
   }
 })
 </script>

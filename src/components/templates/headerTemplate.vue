@@ -1,6 +1,6 @@
 <template>
   <header>
-    <headerOrganism :header-unordered="headerUnordered" :is-search-bar="isSearchBar" />
+    <headerOrganism :header-unordered="headerUnordered" />
   </header>
   <!-- Hero -->
   <!-- Hero -->
@@ -11,10 +11,10 @@
     <div class="mask" style="background-color: rgba(0, 0, 0, 0.6); height: 100%">
       <div class="d-flex justify-content-center align-items-center h-100 p-4">
         <div class="text-white">
-          <h1 class="mb-4">Welcome, Almer Rashad</h1>
-          <h4 class="mb-4">Make your appointment with Patient Care Web now</h4>
-          <a data-mdb-ripple-init class="btn btn-outline-light btn-lg" href="#!" role="button"
-            >Make an Appointment</a
+          <h1 class="mb-4">Welcome</h1>
+          <h4 class="mb-5">Make your appointment with Patient Care Web now</h4>
+          <SearchBarMolecule search-input-placeholder="Search" v-model="searchBarValue"
+            >Search</SearchBarMolecule
           >
         </div>
       </div>
@@ -24,8 +24,9 @@
   <!-- Hero -->
   <div class="container-fluid bg-success bg-gradient py-4">
     <div class="row justify-content-center">
-      <div class="col-10 rounded p-4">
-        <listOrganism :card-list="cardList" />
+      <div class="col-10 rounded p-3">
+        <listOrganism v-if="cardList" :card-list="cardList" />
+        <h2 v-else>There is no doctor right now</h2>
       </div>
     </div>
     <div class="row justify-content-center">
@@ -40,23 +41,21 @@
 import headerOrganism from '../organisms/headerOrganism.vue'
 import listOrganism from '../organisms/listOrganism.vue'
 import paginationOrganism from '../organisms/paginationOrganism.vue'
+import SearchBarMolecule from '../molecules/searchBarMolecule.vue'
 
 defineProps({
   headerUnordered: {
     type: Object,
     required: true
   },
-  isSearchBar: {
-    type: Boolean,
-    required: true
-  },
   cardList: {
-    type: Array,
-    required: true
+    type: Array
   },
   unorderedPagination: {
     type: Array,
     requred: true
   }
 })
+
+const searchBarValue = defineModel()
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg bg-success" data-bs-theme="dark">
+  <nav class="navbar fixed-top navbar-expand-lg bg-success bg-gradient" data-bs-theme="dark">
     <div class="container-fluid">
       <linkAtom link-href="#" link-class="navbar-brand"> Patient Care </linkAtom>
       <buttonAtom
@@ -25,7 +25,7 @@
               link-role="button"
               data-bs-toggle="dropdown"
               aria-expanded="false"
-              >Dropdown</linkAtom
+              >Profile</linkAtom
             >
             <unorderedLinkMolecule
               :unordered-class="headerUnordered.unorderedDropdownClass"
@@ -33,14 +33,11 @@
               :unordered-is-link="true"
             /></li
         ></unorderedLinkMolecule>
-        <form class="d-flex" role="search">
+        <form class="d-flex me-2" role="search">
           <SearchBarMolecule v-if="isSearchBar" search-input-placeholder="Search"
             >Search</SearchBarMolecule
           >
         </form>
-        <span class="navbar-text">
-          <a href="#">Testing</a>
-        </span>
       </div>
     </div>
   </nav>

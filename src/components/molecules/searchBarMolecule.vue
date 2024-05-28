@@ -6,7 +6,7 @@
       :input-value="searchInputValue"
       input-type="search"
       input-aria-label="Search"
-      @input="$emit('input', $event.target.value)"
+      v-model="searchBarValue"
     />
     <buttonAtom button-type="submit" button-class="btn btn-outline-light"><slot></slot></buttonAtom>
   </form>
@@ -25,4 +25,6 @@ defineProps({
     type: String
   }
 })
+
+const searchBarValue = defineModel()
 </script>

@@ -6,10 +6,13 @@
         :linkClass="linkk.linkClass"
         :linkRole="linkk.linkRole"
         :linkAriaCurrent="linkk.linkAriaCurrent"
+        :linkId="linkk.linkId"
         >{{ linkk.linkText }}</linkAtom
       >
     </li>
-    <li v-else v-for="linkk in unorderedList" class="list-group-item">{{ linkk }}</li>
+    <li v-else v-for="linkk in unorderedList" class="list-group-item list-group-item-success">
+      {{ linkk }}
+    </li>
     <slot></slot>
   </ul>
 </template>
