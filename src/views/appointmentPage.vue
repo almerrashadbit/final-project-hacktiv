@@ -12,40 +12,28 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue'
+import { onBeforeMount, ref, watch } from 'vue'
 import appointmentTemplate from '../components/templates/appointmentTemplate.vue'
+import { useRoute } from 'vue-router';
+import { doctorStore } from '@/stores/doctorStores';
+import { doctorScheduleObject } from '../helpers/doctorScheduleObject';
 
-const inputFormModel = ref([])
+const route = useRoute();
+const inputFormModel = ref([]);
+const selectedDoctor = ref(null);
+
 
 const inputFormFloatingInput = ref([
   {
-    id: 'doctor',
+    id: 'doctorInput',
     placeholder: '',
     value: '',
     label: 'Doctor Name',
     inputClass: 'form-control',
     divClass: 'mb-4 form-floating',
     list: 'Test',
-    datalist: ['Testing', 'testing']
+    datalist: ['No doctor Right now']
   },
-  {
-    id: 'daySelect',
-    selectList: ['Testing', 'testing'],
-    placeholder: '',
-    value: '',
-    label: 'Day select',
-    inputClass: 'form-control',
-    divClass: 'mb-4 form-floating',
-  },
-  {
-    id: 'timeSelect',
-    placeholder: '',
-    value: '',
-    type: 'time',
-    label: 'Time select',
-    inputClass: 'form-control',
-    divClass: 'mb-4 form-floating',
-  }
 ])
 
 const inputFormLink = [
@@ -108,7 +96,61 @@ function handleSubmitInputForm(){
 
 watch(inputFormModel.value, async (newValue) => {
   try {
-    console.log(newValue)
+    const useDoctorStore = doctorStore();
+
+    selectedDoctor.value = useDoctorStore.doctorStoresGetter.find(doctor => doctor.name === newValue[0]);
+    if(!selectedDoctor.value){
+      inputFormModel.value[1] = '';
+      inputFormFloatingInput.value = [
+      {
+        id: 'doctorInput',
+        placeholder: '',
+        value: '',
+        label: 'Doctor Name',
+        inputClass: 'form-control',
+        divClass: 'mb-4 form-floating',
+        list: 'Test',
+        datalist: ['No doctor Right now']
+      },
+      ]
+      inputFormFloatingInput.value[0].inputClass = 'form-control is-invalid';
+      selectedDoctor.value = null;
+      return
+    }
+    if(newValue[1]){
+      const date = new Date(newValue[1]);
+      console.log(date.getHours());
+      return
+    }
+    const doctorSchedule = doctorScheduleObject(selectedDoctor.value);
+    inputFormFloatingInput.value[1] =   {
+        id: 'daySelect',
+        placeholder: '',
+        type: 'datetime-local',
+        value: '',
+        label: 'Day select',
+        inputClass: 'form-control',
+        divClass: 'mb-4 form-floating',
+      }
+    console.log(doctorSchedule);
   } catch (error) {}
+})
+
+onBeforeMount(async () => {
+  try {
+    const useDoctorStore = doctorStore();
+
+    if(route.params.doctorId){
+      useDoctorStore.getDoctorProfile(route.params.doctorId)
+    }
+
+    const res = await useDoctorStore.getDoctor(1, null, null, 9999);
+
+    if (!res) {
+      inputFormFloatingInput.value[0].datalist = useDoctorStore.doctorStoresGetter.map(doctor => doctor.name);
+    }
+  } catch (error) {
+    
+  }
 })
 </script>

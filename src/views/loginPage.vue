@@ -16,6 +16,7 @@ import { authStore } from '@/stores/authStores'
 import authTemplate from '../components/templates/authTemplate.vue'
 import { ref } from 'vue'
 import { Modal } from 'bootstrap'
+import { modalNotSuccess } from '@/helpers/modal.helper';
 
 const inputFormModel = ref([])
 const modalObject = ref({
@@ -94,7 +95,9 @@ async function handleSubmitInputForm() {
     const myModal = new Modal(document.getElementById('staticBackdrop'))
     myModal.show()
   } catch (error) {
-    console.log(error)
+    modalObject.value = modalNotSuccess(error.message);
+    const myModal = new Modal(document.getElementById('staticBackdrop'))
+    myModal.show()
   }
 }
 </script>

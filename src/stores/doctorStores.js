@@ -8,7 +8,7 @@ import { createPagination } from '@/helpers/pagination.helper'
 import { doctorToCard } from '@/helpers/doctorCard.helper'
 
 export const doctorStore = defineStore('doctor', () => {
-  const doctorStores = ref({})
+  const doctorStores = ref([])
   const page = ref(1)
   const paginationObject = ref({})
 
@@ -20,23 +20,21 @@ export const doctorStore = defineStore('doctor', () => {
     return paginationObject.value
   })
 
-  const pageGetter = computed(() => {
-    return page.value
-  })
-
-  async function getDoctor(pageSet, nameParam = null, specialityParam = null) {
+  async function getDoctor(pageSet, nameParam = null, specialityParam = null, limitParam = null) {
     try {
       page.value = pageSet
       const params = {
         page: page.value,
-        offset: 5
       }
 
       if (nameParam) {
-        params.name = nameParam
+        params.name = nameParam;
       }
       if (specialityParam) {
-        params.speciality = specialityParam
+        params.speciality = specialityParam;
+      }
+      if(limitParam) {
+        params.limit = limitParam;
       }
 
       console.log(params)
@@ -46,8 +44,10 @@ export const doctorStore = defineStore('doctor', () => {
       if (res.status === 200) {
         console.log(createPagination(res.data.pagination))
         paginationObject.value = createPagination(res.data.pagination)
-        doctorStores.value = doctorToCard(res.data.doctors)
-        console.log(doctorStores.value)
+        doctorStores.value = res.data.doctors;
+        console.log(doctorStores.value, 'Hasil Doctor');
+        console.log(doctorStoresGetter.value, 'Hasil Doctor')
+
         return null
       }
       return modalNotSuccess(res.message)

@@ -21,6 +21,7 @@
             :link-href="linkk.href"
             :class="linkk.class"
             role="button"
+            :data-bs-dismiss="linkk.dataBsDismiss"
             >{{ linkk.text }}</linkAtom
           >
         </div>

@@ -15,6 +15,7 @@ import { doctorStore } from '@/stores/doctorStores'
 import { authStore } from '@/stores/authStores'
 import { onBeforeRouteUpdate, useRoute } from 'vue-router'
 import router from '@/router/index'
+import { doctorToCard } from '@/helpers/doctorCard.helper'
 
 const unorderedPagination = ref({})
 const cardList = ref([])
@@ -62,7 +63,7 @@ async function getDoctorData(page, nameQuery = null) {
     const res = await useDoctorStore.getDoctor(page, nameQuery)
     if (!res) {
       unorderedPagination.value = useDoctorStore.paginationObjectGetter
-      cardList.value = useDoctorStore.doctorStoresGetter
+      cardList.value = doctorToCard(useDoctorStore.doctorStoresGetter);
       return null
     }
     const myModal = new Modal(document.getElementById('staticBackdrop'))

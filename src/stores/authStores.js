@@ -7,17 +7,17 @@ import { modalNotSuccess, modalSuccess } from '@/helpers/modal.helper'
 import { clearSessionKey, getSessionKey, setSessionKey } from '@/utils/session.utils'
 
 export const authStore = defineStore('auth', () => {
-  const tokenFromAuth = ref('')
-  const tokenFromCache = ref('')
-  const rememberMe = ref('')
-  const cacheChecked = ref(false)
+  const tokenFromAuth = ref('');
+  const tokenFromCache = ref('');
+  const rememberMe = ref('');
+  const cacheChecked = ref(false);
 
   const tokenGetter = computed(() => {
     return tokenFromCache.value ? tokenFromCache.value : tokenFromAuth.value
-  })
+  });
   const cacheCheckedGetter = computed(() => {
     return cacheChecked.value
-  })
+  });
 
   const rememberMeGetter = computed(() => {
     return rememberMe.value
@@ -30,11 +30,11 @@ export const authStore = defineStore('auth', () => {
       if (res.status === 200) {
         tokenFromAuth.value = res.data.token
         saveToken(config.idTokenKey, tokenFromAuth.value)
-        return modalSuccess('Login Success', '/home')
+        return modalSuccess('Login Success', { path: '/home', query: { pageId: 1 } })
       }
       return modalNotSuccess(res.message)
     } catch (error) {
-      return modalNotSuccess(error)
+      return modalNotSuccess(error.message)
     }
   }
 

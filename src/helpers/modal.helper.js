@@ -20,7 +20,8 @@ export function modalNotSuccess(text) {
       {
         href: '#',
         class: 'btn btn-danger',
-        text: 'Back'
+        text: 'Back',
+        dataBsDismiss: 'modal'
       }
     ]
   }
@@ -39,7 +40,8 @@ export function modalValidation(text, href) {
       {
         href: '#',
         class: 'btn btn-danger',
-        text: 'Back'
+        text: 'Back',
+        dataBsDismiss: 'modal'
       }
     ]
   }
