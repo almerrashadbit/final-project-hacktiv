@@ -5,8 +5,7 @@
 </template>
 
 <script setup>
-
-const selectValue = defineModel();
+const selectValue = defineModel()
 
 defineProps({
   selectClass: {

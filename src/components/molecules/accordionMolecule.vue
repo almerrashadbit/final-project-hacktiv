@@ -4,11 +4,11 @@
       <div class="accordion-item">
         <h2 class="accordion-header">
           <buttonAtom
-            button-class="accordion-button"
+            button-class="accordion-button collapsed"
             button-type="button"
             button-data-bs-toggle="collapse"
             button-data-bs-target="#collapseOne"
-            button-aria-expanded="true"
+            button-aria-expanded="false"
             button-aria-controls="collapseOne"
           >
             {{ accordionButtonText }}
@@ -16,7 +16,7 @@
         </h2>
         <div
           id="collapseOne"
-          class="accordion-collapse collapse show"
+          class="accordion-collapse collapse"
           data-bs-parent="#accordionExample"
         >
           <div class="accordion-body">

@@ -3,12 +3,16 @@
     :inputFormFloatingInput="inputFormFloatingInput"
     :inputFormLink="inputFormLink"
     :inputFormButton="inputFormButton"
-    :modalObject="modalObject"
-    @handleSubmitInputForm.once="handleSubmitInputForm"
+    @handleSubmitInputForm="handleSubmitInputForm"
     v-model="inputFormModel"
   >
     <h3>Sign into your account</h3>
   </authTemplate>
+  <ModalMolecule
+    :modalHeaderText="modalObject.modalHeaderText"
+    :modalLink="modalObject.modalLink"
+    >{{ modalObject.text }}</ModalMolecule
+  >
 </template>
 
 <script setup>
@@ -16,7 +20,9 @@ import { authStore } from '@/stores/authStores'
 import authTemplate from '../components/templates/authTemplate.vue'
 import { ref } from 'vue'
 import { Modal } from 'bootstrap'
-import { modalNotSuccess } from '@/helpers/modal.helper';
+import { modalNotSuccess } from '@/helpers/modal.helper'
+import ModalMolecule from '@/components/molecules/modalMolecule.vue'
+import { disableAll, activateAll } from '../utils/disableButton.utils'
 
 const inputFormModel = ref([])
 const modalObject = ref({
@@ -26,7 +32,8 @@ const modalObject = ref({
     {
       href: '#',
       class: 'btn btn-success',
-      text: 'Continue'
+      text: 'Continue',
+      id: 'successButton'
     }
   ]
 })
@@ -84,6 +91,7 @@ const inputFormButton = {
 
 async function handleSubmitInputForm() {
   try {
+    disableAll()
     const params = {
       emailOrUsername: inputFormModel.value[0],
       password: inputFormModel.value[1]
@@ -94,10 +102,16 @@ async function handleSubmitInputForm() {
     modalObject.value = await useAuthStore.login(params, inputFormModel.value[2])
     const myModal = new Modal(document.getElementById('staticBackdrop'))
     myModal.show()
+    document.getElementById('successButton').addEventListener('click', () => {
+      myModal.hide()
+    })
+    activateAll()
   } catch (error) {
-    modalObject.value = modalNotSuccess(error.message);
+    disableAll()
+    modalObject.value = modalNotSuccess(error.message)
     const myModal = new Modal(document.getElementById('staticBackdrop'))
     myModal.show()
+    activateAll()
   }
 }
 </script>

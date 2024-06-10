@@ -9,41 +9,34 @@
   >
     <h3>Register your account</h3>
   </authTemplate>
-
-  <div
-    class="modal fade"
-    id="exampleModal"
-    tabindex="-1"
-    aria-labelledby="exampleModalLabel"
-    aria-hidden="true"
+  <ModalMolecule
+    :modalHeaderText="modalObject.modalHeaderText"
+    :modalLink="modalObject.modalLink"
+    >{{ modalObject.text }}</ModalMolecule
   >
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          ></button>
-        </div>
-        <div class="modal-body">...</div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
-    </div>
-  </div>
 </template>
 
 <script setup>
+import ModalMolecule from '@/components/molecules/modalMolecule.vue'
 import authTemplate from '@/components/templates/authTemplate.vue'
+import { modalNotSuccess } from '@/helpers/modal.helper'
 import { authStore } from '@/stores/authStores'
+import { activateAll, disableAll } from '@/utils/disableButton.utils'
+import { Modal } from 'bootstrap'
 import { ref } from 'vue'
 
 const inputFormModel = ref([])
+const modalObject = ref({
+  text: 'Success',
+  modalHeaderText: 'Success',
+  modalLink: [
+    {
+      href: '#',
+      class: 'btn btn-success',
+      text: 'Continue'
+    }
+  ]
+})
 
 const inputFormFloatingInput = [
   {
@@ -107,20 +100,16 @@ const inputFormButton = {
   classButton: 'btn btn-success btn-block btn-lg'
 }
 
-const modalObject = {
-  text: 'Success',
-  modalHeaderText: 'Success',
-  modalLink: [
-    {
-      href: '#',
-      class: 'btn btn-success',
-      text: 'LETS GO'
-    }
-  ]
-}
-
 async function handleSubmitInputForm() {
   try {
+    disableAll()
+    if (inputFormModel.value[3] !== inputFormModel.value[4]) {
+      modalObject.value = modalNotSuccess('Password is not the same')
+      const myModal = new Modal(document.getElementById('staticBackdrop'))
+      myModal.show()
+      activateAll()
+      return
+    }
     const params = {
       username: inputFormModel.value[0],
       email: inputFormModel.value[1],
@@ -130,11 +119,16 @@ async function handleSubmitInputForm() {
 
     const useAuthStore = authStore()
 
-    const res = await useAuthStore.login(params)
-
-    console.log(res)
+    modalObject.value = await useAuthStore.register(params)
+    const myModal = new Modal(document.getElementById('staticBackdrop'))
+    myModal.show()
+    activateAll()
   } catch (error) {
-    console.log(error)
+    disableAll()
+    modalObject.value = modalNotSuccess(error.message)
+    const myModal = new Modal(document.getElementById('staticBackdrop'))
+    myModal.show()
+    activateAll()
   }
 }
 </script>

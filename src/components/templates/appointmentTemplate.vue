@@ -1,8 +1,8 @@
 <template>
   <headerOrganism :header-unordered="headerUnordered" :is-search-bar="false" />
-  <div class="container-fluid">
+  <div class="container-fluid mt-5">
     <div class="row justify-content-evenly align-items-center">
-      <div class="col-8 bg-success text-center rounded">
+      <div class="col-10 bg-success text-center rounded">
         <inputForm
           :inputFormFloatingInput="inputFormFloatingInput"
           :inputFormLink="inputFormLink"

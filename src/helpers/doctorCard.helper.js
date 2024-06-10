@@ -1,7 +1,6 @@
 export function doctorToCard(doctorData) {
   let doctorCard = []
-  console.log(doctorData)
-  console.log(doctorData.length)
+
   for (let i = 0; i < doctorData.length; i++) {
     doctorCard[i] = {
       header: doctorData[i].name,

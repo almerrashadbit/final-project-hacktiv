@@ -20,6 +20,7 @@
             v-for="linkk in modalLink"
             :link-href="linkk.href"
             :class="linkk.class"
+            :id="linkk.id"
             role="button"
             :data-bs-dismiss="linkk.dataBsDismiss"
             >{{ linkk.text }}</linkAtom

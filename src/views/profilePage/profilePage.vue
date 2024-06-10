@@ -12,6 +12,7 @@ import { useRoute } from 'vue-router'
 import profileTemplate from '../../components/templates/profileTemplate.vue'
 import { onMounted, reactive } from 'vue'
 import { doctorStore } from '@/stores/doctorStores'
+import { authStore } from '@/stores/authStores'
 
 const route = useRoute()
 const infoConfig = reactive({
@@ -22,7 +23,7 @@ const infoConfig = reactive({
   },
   infoLink: [
     {
-      href: '#',
+      href: '/appointment',
       class: 'btn btn-success',
       linkText: 'Make an appointment',
       role: 'button'
@@ -32,33 +33,34 @@ const infoConfig = reactive({
 })
 
 const profilePageConfig = {
-  link: {
-    href: '#',
-    linkClass: 'navbar-brand',
-    formLinkText: 'Patient Care'
-  },
   headerUnordered: {
     linkForm: [
       {
-        linkHref: '#',
-        linkClass: 'nav-link active',
+        linkHref: '/home',
+        linkClass: 'nav-link',
         linkText: 'Home',
         listClass: 'nav-item',
         linkAriaCurrent: 'page'
       },
       {
-        linkHref: '#',
+        linkHref: '/appointment',
         linkClass: 'nav-link',
-        linkText: 'Profile',
+        linkText: 'New Appointment',
         listClass: 'nav-item'
       }
     ],
     unorderedDropdownClass: 'dropdown-menu',
     dropdownLinkForm: [
       {
+        linkHref: '/history',
+        linkClass: 'dropdown-item',
+        linkText: 'View/Edit Appointment'
+      },
+      {
         linkHref: '/',
         linkClass: 'dropdown-item',
-        linkText: 'Profile'
+        linkText: 'Logout',
+        linkId: 'logoutlink'
       }
     ]
   }
@@ -66,6 +68,10 @@ const profilePageConfig = {
 
 onMounted(async () => {
   try {
+    document.getElementById('logoutlink').addEventListener('click', () => {
+      const useAuthStore = authStore()
+      useAuthStore.logout()
+    })
     const useDoctorStore = doctorStore()
 
     let res
@@ -79,11 +85,9 @@ onMounted(async () => {
 
     if (!res) {
       const { id, createdAt, updatedAt, ...getObject } = useDoctorStore.doctorStoresGetter
-      console.log(getObject)
       const newArray = Object.entries(getObject).map(
         ([key, value]) => `${key.toUpperCase()}: ${value}`
       )
-      console.log(newArray)
       infoConfig.infoList = newArray
     }
   } catch (error) {}

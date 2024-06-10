@@ -1,12 +1,12 @@
 <template>
   <headerOrganism :header-unordered="headerUnordered" />
 
-  <div class="container-fluid">
+  <div class="container-fluid mt-5">
     <div class="row justify-content-center">
       <div class="col-11">
         <accordionMolecule v-for="listt in listItems" :accordion-button-text="listt.header">
           <InfoListOrganism
-            :imageObject="listt.imageObject"
+            :info-img="listt.imageObject"
             :infoList="listt.linkForm"
             :infoLink="button"
           />

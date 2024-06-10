@@ -8,6 +8,7 @@
     :aria-label="buttonAriaLabel"
     :aria-expanded="buttonAriaExpanded"
     :aria-controls="buttonAriaControls"
+    :id="buttonId"
   >
     <slot></slot>
   </button>
@@ -38,6 +39,9 @@ defineProps({
     type: String
   },
   buttonDataBsDismiss: {
+    type: String
+  },
+  buttonId: {
     type: String
   }
 })

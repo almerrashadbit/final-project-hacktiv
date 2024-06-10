@@ -6,6 +6,11 @@
     :unorderedPagination="unorderedPagination"
     v-model="searchBarValue"
   />
+  <ModalMolecule
+    :modalHeaderText="modalObject.modalHeaderText"
+    :modalLink="modalObject.modalLink"
+    >{{ modalObject.text }}</ModalMolecule
+  >
 </template>
 
 <script setup>
@@ -16,6 +21,7 @@ import { authStore } from '@/stores/authStores'
 import { onBeforeRouteUpdate, useRoute } from 'vue-router'
 import router from '@/router/index'
 import { doctorToCard } from '@/helpers/doctorCard.helper'
+import ModalMolecule from '@/components/molecules/modalMolecule.vue'
 
 const unorderedPagination = ref({})
 const cardList = ref([])
@@ -56,6 +62,18 @@ const homeePage = {
   }
 }
 
+const modalObject = ref({
+  text: 'Success',
+  modalHeaderText: 'Success',
+  modalLink: [
+    {
+      href: '#',
+      class: 'btn btn-success',
+      text: 'Continue'
+    }
+  ]
+})
+
 async function getDoctorData(page, nameQuery = null) {
   try {
     const useDoctorStore = doctorStore()
@@ -63,7 +81,7 @@ async function getDoctorData(page, nameQuery = null) {
     const res = await useDoctorStore.getDoctor(page, nameQuery)
     if (!res) {
       unorderedPagination.value = useDoctorStore.paginationObjectGetter
-      cardList.value = doctorToCard(useDoctorStore.doctorStoresGetter);
+      cardList.value = doctorToCard(useDoctorStore.doctorStoresGetter)
       return null
     }
     const myModal = new Modal(document.getElementById('staticBackdrop'))

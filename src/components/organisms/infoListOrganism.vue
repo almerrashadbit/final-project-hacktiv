@@ -1,5 +1,5 @@
 <template>
-  <div class="container p-5 mt-5">
+  <div class="container p-5">
     <div class="row justify-content-evenly">
       <div class="col-8 col-md-8 col-lg-8 col-xl-3">
         <div class="row">

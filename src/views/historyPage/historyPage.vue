@@ -4,7 +4,18 @@
 
 <script setup>
 import historyTemplate from '../../components/templates/historyTemplate.vue'
-import infoList from './infoList'
+
+const infoList = [
+  {
+    header: 'Testing',
+    imageObject: {
+      imgSrc: 'https://picsum.photos/200',
+      imgAlt: 'Testing',
+      imgClass: 'img-thumbnail'
+    },
+    linkForm: ['Tetsing', 'testing', 'testing']
+  }
+]
 
 const headerUnordered = {
   linkForm: [
@@ -38,3 +49,10 @@ const headerUnordered = {
   ]
 }
 </script>
+
+<style>
+html,
+body {
+  background-color: #fbfbfb;
+}
+</style>

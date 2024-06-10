@@ -17,16 +17,10 @@
       </div>
     </div>
   </div>
-  <modalMolecule
-    :modalHeaderText="modalObject.modalHeaderText"
-    :modalLink="modalObject.modalLink"
-    >{{ modalObject.text }}</modalMolecule
-  >
 </template>
 
 <script setup>
 import inputForm from '../organisms/inputFormOrganism.vue'
-import modalMolecule from '../molecules/modalMolecule.vue'
 
 const inputFormModel = defineModel({ type: Array })
 
@@ -40,10 +34,6 @@ defineProps({
     required: true
   },
   inputFormButton: {
-    type: Object,
-    required: true
-  },
-  modalObject: {
     type: Object,
     required: true
   }

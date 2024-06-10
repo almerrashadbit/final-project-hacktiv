@@ -26,6 +26,7 @@
         v-if="inputFormButton"
         type="submit"
         :button-class="inputFormButton.classButton"
+        button-id="submitFormButton"
         >{{ inputFormButton.text }}</buttonAtom
       >
     </div>
