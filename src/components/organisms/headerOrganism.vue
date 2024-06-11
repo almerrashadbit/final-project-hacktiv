@@ -15,29 +15,10 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <unorderedLinkMolecule
           unordered-class="navbar-nav me-auto mb-2 mb-lg-0"
-          :unordered-list="headerUnordered.linkForm"
+          :unordered-list="headerUnordered"
           :unordered-is-link="true"
         >
-          <li class="nav-item dropdown">
-            <linkAtom
-              link-href="#"
-              link-class="nav-link dropdown-toggle"
-              link-role="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-              >Profile</linkAtom
-            >
-            <unorderedLinkMolecule
-              :unordered-class="headerUnordered.unorderedDropdownClass"
-              :unordered-list="headerUnordered.dropdownLinkForm"
-              :unordered-is-link="true"
-            /></li
-        ></unorderedLinkMolecule>
-        <form class="d-flex me-2" role="search">
-          <SearchBarMolecule v-if="isSearchBar" search-input-placeholder="Search"
-            >Search</SearchBarMolecule
-          >
-        </form>
+        </unorderedLinkMolecule>
       </div>
     </div>
   </nav>
@@ -52,10 +33,6 @@ import SearchBarMolecule from '../molecules/searchBarMolecule.vue'
 defineProps({
   headerUnordered: {
     type: Object,
-    required: true
-  },
-  isSearchBar: {
-    type: Boolean,
     required: true
   }
 })

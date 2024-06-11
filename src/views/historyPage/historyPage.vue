@@ -3,7 +3,9 @@
 </template>
 
 <script setup>
+import { onMounted } from 'vue';
 import historyTemplate from '../../components/templates/historyTemplate.vue'
+import { authStore } from '@/stores/authStores';
 
 const infoList = [
   {
@@ -17,37 +19,41 @@ const infoList = [
   }
 ]
 
-const headerUnordered = {
-  linkForm: [
-    {
-      linkHref: '/home',
-      linkClass: 'nav-link',
-      linkText: 'Home',
-      listClass: 'nav-item',
-      linkAriaCurrent: 'page'
-    },
-    {
-      linkHref: '/appointment',
-      linkClass: 'nav-link',
-      linkText: 'New Appointment',
-      listClass: 'nav-item'
-    }
-  ],
-  unorderedDropdownClass: 'dropdown-menu',
-  dropdownLinkForm: [
-    {
-      linkHref: '/history',
-      linkClass: 'dropdown-item',
-      linkText: 'View/Edit Appointment'
-    },
-    {
-      linkHref: '/',
-      linkClass: 'dropdown-item',
-      linkText: 'Logout',
-      linkId: 'logoutlink'
-    }
-  ]
-}
+const headerUnordered = [
+      {
+        linkHref: '#',
+        linkClass: 'nav-link active',
+        linkText: 'Home',
+        listClass: 'nav-item',
+        linkAriaCurrent: 'page'
+      },
+      {
+        linkHref: '/appointment',
+        linkClass: 'nav-link',
+        linkText: 'New Appointment',
+        listClass: 'nav-item'
+      },
+      {
+        linkHref: '/history',
+        linkClass: 'nav-link',
+        linkText: 'View/Edit Appointment',
+        listClass: 'nav-item'
+      },
+      {
+        linkHref: '/',
+        linkClass: 'nav-link',
+        linkText: 'Logout',
+        listClass: 'nav-item',
+        linkId: 'logoutlink'
+      }
+    ]
+
+onMounted(() => {
+  document.getElementById('logoutlink').addEventListener('click', () => {
+    const useAuthStore = authStore()
+    useAuthStore.logout()
+  })
+})
 </script>
 
 <style>

@@ -3,7 +3,7 @@
     :infoImg="infoConfig.imageObject"
     :infoLink="infoConfig.infoLink"
     :infoList="infoConfig.infoList"
-    :headerUnordered="profilePageConfig.headerUnordered"
+    :headerUnordered="profilePageConfig"
   ></profileTemplate>
 </template>
 
@@ -32,11 +32,9 @@ const infoConfig = reactive({
   infoList: []
 })
 
-const profilePageConfig = {
-  headerUnordered: {
-    linkForm: [
+const profilePageConfig = [
       {
-        linkHref: '/home',
+        linkHref: '#',
         linkClass: 'nav-link',
         linkText: 'Home',
         listClass: 'nav-item',
@@ -47,24 +45,21 @@ const profilePageConfig = {
         linkClass: 'nav-link',
         linkText: 'New Appointment',
         listClass: 'nav-item'
-      }
-    ],
-    unorderedDropdownClass: 'dropdown-menu',
-    dropdownLinkForm: [
+      },
       {
         linkHref: '/history',
-        linkClass: 'dropdown-item',
-        linkText: 'View/Edit Appointment'
+        linkClass: 'nav-link',
+        linkText: 'View/Edit Appointment',
+        listClass: 'nav-item'
       },
       {
         linkHref: '/',
-        linkClass: 'dropdown-item',
+        linkClass: 'nav-link',
         linkText: 'Logout',
+        listClass: 'nav-item',
         linkId: 'logoutlink'
       }
     ]
-  }
-}
 
 onMounted(async () => {
   try {

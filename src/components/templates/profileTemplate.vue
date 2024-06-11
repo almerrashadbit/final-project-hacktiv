@@ -1,6 +1,6 @@
 <template>
   <header>
-    <headerOrganism :header-unordered="headerUnordered" :is-search-bar="false" />
+    <headerOrganism :header-unordered="headerUnordered" />
   </header>
   <infoListOrganism :info-img="infoImg" :info-link="infoLink" :info-list="infoList" />
 </template>

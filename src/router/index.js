@@ -57,7 +57,6 @@ router.beforeEach((to, from) => {
   const res = () => {
     if (!useAuthStore.cacheCheckedGetter) {
       const res = useAuthStore.checkCache()
-      console.log(res)
       return res
     }
     return useAuthStore.tokenGetter

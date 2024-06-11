@@ -1,5 +1,5 @@
 <template>
-  <headerOrganism :header-unordered="headerUnordered" :is-search-bar="false" />
+  <headerOrganism :header-unordered="headerUnordered" />
   <div class="container-fluid mt-5">
     <div class="row justify-content-evenly align-items-center">
       <div class="col-10 bg-success text-center rounded">

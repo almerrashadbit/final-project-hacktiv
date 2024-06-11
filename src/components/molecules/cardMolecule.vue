@@ -24,7 +24,7 @@ defineProps({
     type: String
   },
   cardLinkHref: {
-    type: String
+    type: Object
   },
   cardLinkText: {
     type: String

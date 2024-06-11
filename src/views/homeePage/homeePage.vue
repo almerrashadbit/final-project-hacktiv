@@ -1,7 +1,6 @@
 <template>
   <headerTemplate
-    :headerUnordered="homeePage.headerUnordered"
-    :isSearchBar="homeePage.isSearchBar"
+    :headerUnordered="homeePage"
     :cardList="cardList"
     :unorderedPagination="unorderedPagination"
     v-model="searchBarValue"
@@ -23,14 +22,12 @@ import router from '@/router/index'
 import { doctorToCard } from '@/helpers/doctorCard.helper'
 import ModalMolecule from '@/components/molecules/modalMolecule.vue'
 
-const unorderedPagination = ref({})
+const unorderedPagination = ref([])
 const cardList = ref([])
 const searchBarValue = ref()
 const route = useRoute()
 
-const homeePage = {
-  headerUnordered: {
-    linkForm: [
+const homeePage =[
       {
         linkHref: '#',
         linkClass: 'nav-link active',
@@ -43,24 +40,21 @@ const homeePage = {
         linkClass: 'nav-link',
         linkText: 'New Appointment',
         listClass: 'nav-item'
-      }
-    ],
-    unorderedDropdownClass: 'dropdown-menu',
-    dropdownLinkForm: [
+      },
       {
         linkHref: '/history',
-        linkClass: 'dropdown-item',
-        linkText: 'View/Edit Appointment'
+        linkClass: 'nav-link',
+        linkText: 'View/Edit Appointment',
+        listClass: 'nav-item'
       },
       {
         linkHref: '/',
-        linkClass: 'dropdown-item',
+        linkClass: 'nav-link',
         linkText: 'Logout',
+        listClass: 'nav-item',
         linkId: 'logoutlink'
       }
     ]
-  }
-}
 
 const modalObject = ref({
   text: 'Success',

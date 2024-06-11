@@ -37,7 +37,6 @@ export const doctorStore = defineStore('doctor', () => {
 
       const res = await GET(config.baseURL, 'DOCTOR', params)
       if (res.status === 200) {
-        console.log(createPagination(res.data.pagination))
         paginationObject.value = createPagination(res.data.pagination)
         doctorStores.value = res.data.doctors
 

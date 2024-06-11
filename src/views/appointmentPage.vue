@@ -3,7 +3,7 @@
     :inputFormFloatingInput="inputFormFloatingInput"
     :inputFormLink="inputFormLink"
     :inputFormButton="inputFormButton"
-    :headerUnordered="profilePageConfig.headerUnordered"
+    :headerUnordered="profilePageConfig"
     @handleSubmitInputForm="handleSubmitInputForm"
     v-model="inputFormModel"
   >
@@ -42,11 +42,9 @@ const inputFormFloatingInput = ref([
 
 const inputFormButton = ref()
 
-const profilePageConfig = {
-  headerUnordered: {
-    linkForm: [
+const profilePageConfig = [
       {
-        linkHref: '/home',
+        linkHref: '#',
         linkClass: 'nav-link',
         linkText: 'Home',
         listClass: 'nav-item',
@@ -54,27 +52,24 @@ const profilePageConfig = {
       },
       {
         linkHref: '/appointment',
-        linkClass: 'nav-link',
+        linkClass: 'nav-link active',
         linkText: 'New Appointment',
         listClass: 'nav-item'
-      }
-    ],
-    unorderedDropdownClass: 'dropdown-menu',
-    dropdownLinkForm: [
+      },
       {
         linkHref: '/history',
-        linkClass: 'dropdown-item',
-        linkText: 'View/Edit Appointment'
+        linkClass: 'nav-link',
+        linkText: 'View/Edit Appointment',
+        listClass: 'nav-item'
       },
       {
         linkHref: '/',
-        linkClass: 'dropdown-item',
+        linkClass: 'nav-link',
         linkText: 'Logout',
+        listClass: 'nav-item',
         linkId: 'logoutlink'
       }
     ]
-  }
-}
 
 async function handleSubmitInputForm() {
   const useAppointmentStore = appointmentStore()
