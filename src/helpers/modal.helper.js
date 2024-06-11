@@ -6,7 +6,8 @@ export function modalSuccess(text, href) {
       {
         href: href,
         class: 'btn btn-success',
-        text: 'Continue'
+        text: 'Continue',
+        id: 'successButton'
       }
     ]
   }

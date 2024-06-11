@@ -107,7 +107,6 @@ async function handleSubmitInputForm() {
     })
     activateAll()
   } catch (error) {
-    disableAll()
     modalObject.value = modalNotSuccess(error.message)
     const myModal = new Modal(document.getElementById('staticBackdrop'))
     myModal.show()

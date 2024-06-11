@@ -121,10 +121,12 @@ async function handleSubmitInputForm() {
 
     modalObject.value = await useAuthStore.register(params)
     const myModal = new Modal(document.getElementById('staticBackdrop'))
-    myModal.show()
+    myModal.show();
+    document.getElementById('successButton').addEventListener('click', () => {
+      myModal.hide()
+    })
     activateAll()
   } catch (error) {
-    disableAll()
     modalObject.value = modalNotSuccess(error.message)
     const myModal = new Modal(document.getElementById('staticBackdrop'))
     myModal.show()
