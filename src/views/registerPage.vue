@@ -33,7 +33,8 @@ const modalObject = ref({
     {
       href: '#',
       class: 'btn btn-success',
-      text: 'Continue'
+      text: 'Continue',
+      id: 'successButton'
     }
   ]
 })
