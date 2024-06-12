@@ -1,5 +1,5 @@
 <template>
-  <form class="d-flex" role="search">
+  <form class="d-flex" role="search" @submit.prevent="$emit('submitHandleForm')">
     <inputAtom
       input-class="form-control me-2"
       :input-placeholder="searchInputPlaceholder"

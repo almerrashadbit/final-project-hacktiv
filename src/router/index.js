@@ -78,7 +78,8 @@ router.beforeEach((to, from) => {
     return {
       path: '/home',
       query: {
-        pageId: 1
+        pageId: 1,
+        search: 'doctor'
       }
     }
   }

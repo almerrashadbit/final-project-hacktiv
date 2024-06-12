@@ -16,7 +16,7 @@ export function doctorScheduleObject(doctorSelect) {
     const timeSchedule = timeRange
       .trim()
       .split(' - ')
-      .map((timeElement) => timeElement[0])
+      .map((timeElement) => timeElement.replace('am', '').replace('pm', ''))
     for (
       let i = daySelect[daySchedule[0]];
       i <= daySelect[daySchedule[daySchedule.length - 1]];

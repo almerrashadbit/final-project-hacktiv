@@ -1,5 +1,5 @@
 <template>
-  <h2 id="appointmentTitle" class="text-center mt-5"></h2>
+  <h2 id="appointmentTitle" class="text-center text-white mt-5 bg-success p-3 bg-gradient"></h2>
   <appointmentTemplate
     :inputFormFloatingInput="inputFormFloatingInput"
     :inputFormLink="inputFormLink"
@@ -188,7 +188,9 @@ watch(inputFormModel.value, async (newValue) => {
         inputFormButton.value = null
         return
       }
-
+      console.log(appointmentHour);
+      console.log(selectedDoctorSchedule.value[dayArray].minTime);
+      console.log(selectedDoctorSchedule.value[dayArray].maxTime);
       if (
         appointmentHour < selectedDoctorSchedule.value[dayArray].minTime ||
         appointmentHour > selectedDoctorSchedule.value[dayArray].maxTime

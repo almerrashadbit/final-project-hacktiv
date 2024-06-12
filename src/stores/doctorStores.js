@@ -22,7 +22,8 @@ export const doctorStore = defineStore('doctor', () => {
     try {
       page.value = pageSet
       const params = {
-        page: page.value
+        page: page.value,
+        sort: 'name',
       }
 
       if (nameParam) {
