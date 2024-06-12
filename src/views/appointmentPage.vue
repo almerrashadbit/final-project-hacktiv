@@ -188,9 +188,9 @@ watch(inputFormModel.value, async (newValue) => {
         inputFormButton.value = null
         return
       }
-      console.log(appointmentHour);
-      console.log(selectedDoctorSchedule.value[dayArray].minTime);
-      console.log(selectedDoctorSchedule.value[dayArray].maxTime);
+      console.log(appointmentHour)
+      console.log(selectedDoctorSchedule.value[dayArray].minTime)
+      console.log(selectedDoctorSchedule.value[dayArray].maxTime)
       if (
         appointmentHour < selectedDoctorSchedule.value[dayArray].minTime ||
         appointmentHour > selectedDoctorSchedule.value[dayArray].maxTime

@@ -28,7 +28,7 @@ import { Modal } from 'bootstrap'
 const unorderedPagination = ref([])
 const cardList = ref([])
 const searchBarValue = ref()
-const route = useRoute();
+const route = useRoute()
 
 const searchText = ref('Filter: Doctor')
 
@@ -74,23 +74,23 @@ const modalObject = ref({
 })
 
 function submitHandleForm() {
-  if(route.query.search === 'speciality'){
-    searchText.value = 'Filter: Doctor';
+  if (route.query.search === 'speciality') {
+    searchText.value = 'Filter: Doctor'
     router.replace({
       query: {
         pageId: 1,
-        search: 'doctor',
+        search: 'doctor'
       }
     })
-    return;
+    return
   }
   router.replace({
-      query: {
-        pageId: 1,
-        search: 'speciality',
-      }
-    })
-  searchText.value = 'Filter: Speciality';
+    query: {
+      pageId: 1,
+      search: 'speciality'
+    }
+  })
+  searchText.value = 'Filter: Speciality'
 }
 
 async function getDoctorData(page, nameQuery = null, specialityQuery = null) {
@@ -100,8 +100,8 @@ async function getDoctorData(page, nameQuery = null, specialityQuery = null) {
     const res = await useDoctorStore.getDoctor(page, nameQuery, specialityQuery)
     if (!res) {
       unorderedPagination.value = useDoctorStore.paginationObjectGetter
-      cardList.value = doctorToCard(useDoctorStore.doctorStoresGetter);
-      console.log(cardList.value);
+      cardList.value = doctorToCard(useDoctorStore.doctorStoresGetter)
+      console.log(cardList.value)
       return null
     }
     const myModal = new Modal(document.getElementById('staticBackdrop'))
@@ -111,31 +111,31 @@ async function getDoctorData(page, nameQuery = null, specialityQuery = null) {
 
 watch(searchBarValue, async (newValue) => {
   try {
-    if(route.query.search == 'speciality'){
+    if (route.query.search == 'speciality') {
       router.replace({
-      query: {
-        pageId: 1,
-        search: 'speciality'
-      }
-    })
-      await getDoctorData(1, null, newValue);
-      return;
-    };
+        query: {
+          pageId: 1,
+          search: 'speciality'
+        }
+      })
+      await getDoctorData(1, null, newValue)
+      return
+    }
     router.replace({
       query: {
         pageId: 1,
         search: 'doctor'
       }
-    });
+    })
     await getDoctorData(1, newValue)
   } catch (error) {}
 })
 
 onBeforeRouteUpdate(async (to, from) => {
   try {
-    if(to.query.search == 'speciality'){
-      await getDoctorData(to.query.pageId, null, searchBarValue.value);
-      return;
+    if (to.query.search == 'speciality') {
+      await getDoctorData(to.query.pageId, null, searchBarValue.value)
+      return
     }
     await getDoctorData(to.query.pageId, searchBarValue.value)
   } catch (error) {}
@@ -148,7 +148,7 @@ onBeforeMount(async () => {
         pageId: 1,
         search: 'doctor'
       }
-  })
+    })
     await getDoctorData(1)
   } catch (error) {}
 })

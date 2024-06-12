@@ -13,7 +13,10 @@
         <div class="text-white">
           <h1 class="mb-4">Welcome</h1>
           <h4 class="mb-5">Make your appointment with Patient Care Web now</h4>
-          <SearchBarMolecule search-input-placeholder="Search" v-model="searchBarValue" @submitHandleForm="$emit('submitHandleForm')"
+          <SearchBarMolecule
+            search-input-placeholder="Search"
+            v-model="searchBarValue"
+            @submitHandleForm="$emit('submitHandleForm')"
             >{{ searchText }}</SearchBarMolecule
           >
         </div>

@@ -64,7 +64,6 @@ export const appointmentStore = defineStore('appointment', () => {
 
   async function deleteAppointment(appointmentId) {
     try {
-
       if (appointmentId === lastAppointmentId.value) {
         return modalSuccess('Delete appointment success', { path: '/history' })
       }
