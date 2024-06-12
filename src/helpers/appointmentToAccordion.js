@@ -40,7 +40,8 @@ export async function appointmentToAccordion(appointmentArray) {
               href: { path: '/history', query: { deleteId: appointmentArray[i].id } },
               class: 'btn btn-danger',
               linkText: 'Delete',
-              role: 'button'
+              role: 'button',
+              id: `deleteButton`
             }
           ]
         }

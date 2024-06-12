@@ -15,6 +15,7 @@
             :link-class="linkk.class"
             :link-href="linkk.href"
             :link-role="linkk.role"
+            :link-id="linkk.id"
             >{{ linkk.linkText }}</linkAtom
           >
         </div>

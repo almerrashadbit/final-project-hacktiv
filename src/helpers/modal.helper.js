@@ -38,7 +38,8 @@ export function modalValidation(text) {
         href: '#',
         class: 'btn btn-danger',
         text: 'Back',
-        dataBsDismiss: 'modal'
+        dataBsDismiss: 'modal',
+        id: 'successButton'
       },
       {
         href: '#',

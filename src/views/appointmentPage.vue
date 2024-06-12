@@ -1,5 +1,5 @@
 <template>
-  <h2 id="appointmentTitle"></h2>
+  <h2 id="appointmentTitle" class="text-center mt-5"></h2>
   <appointmentTemplate
     :inputFormFloatingInput="inputFormFloatingInput"
     :inputFormLink="inputFormLink"
@@ -271,6 +271,6 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  min-height: 90vh;
+  min-height: 80vh;
 }
 </style>

@@ -63,7 +63,7 @@ export async function DELETE(baseURL, endpoint, data = {}, params = '', token = 
     baseURL,
     headers: {
       ...defaultHeaders,
-      token: token
+      authorization: `Bearer ${token}`
     },
     ...baseConfig,
     method: 'delete',

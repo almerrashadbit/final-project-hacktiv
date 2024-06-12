@@ -4,55 +4,13 @@ import { getToken, saveToken, clearToken } from '@/utils/cache.utils'
 import { GET, PATCH, POST } from '@/utils/http.utils'
 import config from '@/configs/env.config'
 import { modalNotSuccess, modalSuccess } from '@/helpers/modal.helper'
+import { DELETE } from '../utils/http.utils'
 
 export const appointmentStore = defineStore('appointment', () => {
   const doctorValid = ref(false)
   const dayValid = ref(false)
   const timeValid = ref(false)
-  const doctorDataList = ref(['There is no doctor right now'])
-
-  const inputFormGetter = computed(() => {
-    if (doctorValid.value) {
-      return [
-        {
-          id: 'doctorInput',
-          placeholder: '',
-          value: '',
-          label: 'Doctor Name',
-          inputClass: 'form-control',
-          divClass: 'mb-4 form-floating',
-          list: 'Test',
-          datalist: doctorDataList.value
-        },
-        {
-          id: 'daySelect',
-          placeholder: '',
-          type: 'datetime-local',
-          value: '',
-          label: 'Day select',
-          inputClass: 'form-control',
-          divClass: 'mb-4 form-floating'
-        }
-      ]
-    }
-
-    return [
-      {
-        id: 'doctorInput',
-        placeholder: '',
-        value: '',
-        label: 'Doctor Name',
-        inputClass: 'form-control',
-        divClass: 'mb-4 form-floating',
-        list: 'Test',
-        datalist: doctorDataList.value
-      }
-    ]
-  })
-
-  function setDoctorDatalist(doctorStore) {
-    doctorDataList.value = doctorStore.map((doctor) => doctor.name)
-  }
+  const lastAppointmentId = ref()
 
   async function makeNewApointment(doctorId, time, description = '') {
     try {
@@ -104,5 +62,29 @@ export const appointmentStore = defineStore('appointment', () => {
     }
   }
 
-  return { setDoctorDatalist, makeNewApointment, getAppointment, editAppointment, inputFormGetter }
+  async function deleteAppointment(appointmentId) {
+    try {
+      console.log(appointmentId)
+      console.log(lastAppointmentId.value)
+      if (appointmentId === lastAppointmentId.value) {
+        return modalSuccess('Delete appointment success', { path: '/history' })
+      }
+      lastAppointmentId.value = appointmentId
+      const token = getToken(config.idTokenKey)
+      const res = await DELETE(config.baseURL, 'APPOINTMENT', {}, null, token, `/${appointmentId}`)
+      if (res.status === 200) {
+        return modalSuccess('Delete appointment success', { path: '/history' })
+      }
+      return modalNotSuccess(res.statusText)
+    } catch (error) {
+      return modalNotSuccess(error.message)
+    }
+  }
+
+  return {
+    makeNewApointment,
+    getAppointment,
+    editAppointment,
+    deleteAppointment
+  }
 })
