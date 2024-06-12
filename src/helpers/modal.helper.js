@@ -22,27 +22,30 @@ export function modalNotSuccess(text) {
         href: '#',
         class: 'btn btn-danger',
         text: 'Back',
-        dataBsDismiss: 'modal'
+        dataBsDismiss: 'modal',
+        id: 'successButton'
       }
     ]
   }
 }
 
-export function modalValidation(text, href) {
+export function modalValidation(text) {
   return {
     text: text,
     modalHeaderText: 'Warning',
     modalLink: [
       {
-        href: href,
-        class: 'btn btn-success',
-        text: 'Continue'
-      },
-      {
         href: '#',
         class: 'btn btn-danger',
         text: 'Back',
         dataBsDismiss: 'modal'
+      },
+      {
+        href: '#',
+        class: 'btn btn-warning',
+        text: 'Continue',
+        dataBsDismiss: 'modal',
+        id: 'validationButton'
       }
     ]
   }

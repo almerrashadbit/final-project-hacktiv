@@ -7,8 +7,8 @@ export function disableAll() {
 
 export function activateAll() {
   document.querySelector('a').removeAttribute('aria-disabled')
-  const aAttribute = document.querySelector('a').getAttribute('class');
-  console.log(aAttribute);
+  const aAttribute = document.querySelector('a').getAttribute('class')
+  console.log(aAttribute)
   document.querySelector('a').setAttribute('class', aAttribute.replace('disabled', '').trim())
   document.querySelector('button').removeAttribute('disabled')
 }

@@ -16,7 +16,7 @@ export async function GET(baseURL, endpoint, params = '', token = '', option = '
     baseURL,
     headers: {
       ...defaultHeaders,
-      token: token
+      authorization: `Bearer ${token}`
     },
     ...baseConfig,
     method: 'get',
@@ -71,5 +71,22 @@ export async function DELETE(baseURL, endpoint, data = {}, params = '', token = 
     params,
     data: JSON.stringify(data)
   }
+  return await axios(config)
+}
+
+export async function PATCH(baseURL, endpoint, data = {}, params = '', token = '', option = '') {
+  const config = {
+    baseURL,
+    headers: {
+      ...defaultHeaders,
+      authorization: `Bearer ${token}`
+    },
+    ...baseConfig,
+    method: 'patch',
+    url: ENDPOINTS[endpoint] + option,
+    params,
+    data: JSON.stringify(data)
+  }
+
   return await axios(config)
 }

@@ -46,7 +46,15 @@ const router = createRouter({
       path: '/appointment',
       name: 'Appointment Page',
       component: () => import('../views/appointmentPage.vue'),
-      meta: { requiresAuth: true }
+      meta: { requiresAuth: true },
+      children: [
+        {
+          path: 'edit/:id',
+          name: 'Edit Appointment Page',
+          component: () => import('../views/profilePage/profilePage.vue'),
+          meta: { requiresAuth: true }
+        }
+      ]
     }
   ]
 })

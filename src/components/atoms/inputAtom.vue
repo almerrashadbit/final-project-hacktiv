@@ -6,6 +6,7 @@
     :placeholder="inputPlaceholder"
     :aria-label="inputAriaLabel"
     :list="inputList"
+    :min="inputMin"
     v-model="inputValue"
   />
 </template>
@@ -31,6 +32,9 @@ defineProps({
     type: String
   },
   inputList: {
+    type: String
+  },
+  inputMin: {
     type: String
   }
 })

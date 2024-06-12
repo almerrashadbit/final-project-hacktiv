@@ -27,34 +27,34 @@ const cardList = ref([])
 const searchBarValue = ref()
 const route = useRoute()
 
-const homeePage =[
-      {
-        linkHref: '#',
-        linkClass: 'nav-link active',
-        linkText: 'Home',
-        listClass: 'nav-item',
-        linkAriaCurrent: 'page'
-      },
-      {
-        linkHref: '/appointment',
-        linkClass: 'nav-link',
-        linkText: 'New Appointment',
-        listClass: 'nav-item'
-      },
-      {
-        linkHref: '/history',
-        linkClass: 'nav-link',
-        linkText: 'View/Edit Appointment',
-        listClass: 'nav-item'
-      },
-      {
-        linkHref: '/',
-        linkClass: 'nav-link',
-        linkText: 'Logout',
-        listClass: 'nav-item',
-        linkId: 'logoutlink'
-      }
-    ]
+const homeePage = [
+  {
+    linkHref: '#',
+    linkClass: 'nav-link active',
+    linkText: 'Home',
+    listClass: 'nav-item',
+    linkAriaCurrent: 'page'
+  },
+  {
+    linkHref: '/appointment',
+    linkClass: 'nav-link',
+    linkText: 'New Appointment',
+    listClass: 'nav-item'
+  },
+  {
+    linkHref: '/history',
+    linkClass: 'nav-link',
+    linkText: 'View/Edit Appointment',
+    listClass: 'nav-item'
+  },
+  {
+    linkHref: '/',
+    linkClass: 'nav-link',
+    linkText: 'Logout',
+    listClass: 'nav-item',
+    linkId: 'logoutlink'
+  }
+]
 
 const modalObject = ref({
   text: 'Success',
@@ -85,8 +85,6 @@ async function getDoctorData(page, nameQuery = null) {
 
 watch(searchBarValue, async (newValue) => {
   try {
-    console.log('WATCHEFRD')
-
     router.replace({
       query: {
         pageId: 1
@@ -117,7 +115,7 @@ onMounted(() => {
 })
 </script>
 
-<style>
+<style scoped>
 html,
 body {
   background-color: #198754;

@@ -16,6 +16,7 @@
     :input-type="floatingInputType"
     :input-aria-label="floatingInputAriaLabel"
     :input-list="floatingInputList"
+    :input-min="floatingInputMin"
     v-model="floatingInputValue"
   />
 
@@ -55,6 +56,9 @@ defineProps({
   },
   floatingInputSelectList: {
     type: Array
+  },
+  floatingInputMin: {
+    type: String
   }
 })
 

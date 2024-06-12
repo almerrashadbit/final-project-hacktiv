@@ -1,4 +1,5 @@
 <template>
+  <h2 id="appointmentTitle"></h2>
   <appointmentTemplate
     :inputFormFloatingInput="inputFormFloatingInput"
     :inputFormLink="inputFormLink"
@@ -10,10 +11,15 @@
     <h5 class="mt-3" id="dateTitle"></h5>
     <h5 class="mt-3" id="appointmentDate"></h5>
   </appointmentTemplate>
+  <ModalMolecule
+    :modalHeaderText="modalObject.modalHeaderText"
+    :modalLink="modalObject.modalLink"
+    >{{ modalObject.text }}</ModalMolecule
+  >
 </template>
 
 <script setup>
-import { onBeforeMount, onMounted, ref, watch } from 'vue'
+import { onBeforeMount, onBeforeUnmount, onMounted, onUnmounted, ref, watch } from 'vue'
 import appointmentTemplate from '../components/templates/appointmentTemplate.vue'
 import { useRoute } from 'vue-router'
 import { doctorStore } from '@/stores/doctorStores'
@@ -21,12 +27,33 @@ import { appointmentStore } from '../stores/appointmentStores'
 import { doctorScheduleObject } from '../helpers/doctorScheduleObject'
 import { authStore } from '@/stores/authStores'
 import { Modal } from 'bootstrap'
+import ModalMolecule from '@/components/molecules/modalMolecule.vue'
+import { activateAll, disableAll } from '@/utils/disableButton.utils'
+import { modalSuccess, modalValidation } from '@/helpers/modal.helper'
 
 const route = useRoute()
 const inputFormModel = ref([])
 const selectedDoctor = ref(null)
 const selectedDoctorSchedule = ref([])
 
+const modalObject = ref({
+  text: 'Success',
+  modalHeaderText: 'Success',
+  modalLink: [
+    {
+      href: '#',
+      class: 'btn btn-success',
+      text: 'Continue',
+      id: 'successButton'
+    },
+    {
+      href: '#',
+      class: 'btn btn-success',
+      text: 'Continue',
+      id: 'validationButton'
+    }
+  ]
+})
 const inputFormFloatingInput = ref([
   {
     id: 'doctorInput',
@@ -43,42 +70,66 @@ const inputFormFloatingInput = ref([
 const inputFormButton = ref()
 
 const profilePageConfig = [
-      {
-        linkHref: '#',
-        linkClass: 'nav-link',
-        linkText: 'Home',
-        listClass: 'nav-item',
-        linkAriaCurrent: 'page'
-      },
-      {
-        linkHref: '/appointment',
-        linkClass: 'nav-link active',
-        linkText: 'New Appointment',
-        listClass: 'nav-item'
-      },
-      {
-        linkHref: '/history',
-        linkClass: 'nav-link',
-        linkText: 'View/Edit Appointment',
-        listClass: 'nav-item'
-      },
-      {
-        linkHref: '/',
-        linkClass: 'nav-link',
-        linkText: 'Logout',
-        listClass: 'nav-item',
-        linkId: 'logoutlink'
-      }
-    ]
+  {
+    linkHref: '/home',
+    linkClass: 'nav-link',
+    linkText: 'Home',
+    listClass: 'nav-item',
+    linkAriaCurrent: 'page'
+  },
+  {
+    linkHref: '/appointment',
+    linkClass: 'nav-link active',
+    linkText: 'New Appointment',
+    listClass: 'nav-item'
+  },
+  {
+    linkHref: '/history',
+    linkClass: 'nav-link',
+    linkText: 'View/Edit Appointment',
+    listClass: 'nav-item'
+  },
+  {
+    linkHref: '/',
+    linkClass: 'nav-link',
+    linkText: 'Logout',
+    listClass: 'nav-item',
+    linkId: 'logoutlink'
+  }
+]
 
-async function handleSubmitInputForm() {
+function handleSubmitInputForm() {
+  disableAll()
+
   const useAppointmentStore = appointmentStore()
+  const myModal = new Modal(document.getElementById('staticBackdrop'))
+  modalObject.value = modalValidation('Are you sure the data is correct?')
 
-  useAppointmentStore.makeNewApointment(
-    selectedDoctor.value.id,
-    inputFormModel.value[1],
-    inputFormModel.value[2]
-  )
+  myModal.show()
+
+  document.getElementById('validationButton').addEventListener('click', async () => {
+    if (route.name === 'Edit Appointment Page') {
+      console.log('Testing')
+      console.log(route.params.id)
+      modalObject.value = await useAppointmentStore.editAppointment(
+        selectedDoctor.value.id,
+        inputFormModel.value[1],
+        inputFormModel.value[2],
+        route.params.id
+      )
+      myModal.show()
+      return
+    }
+    modalObject.value = await useAppointmentStore.makeNewApointment(
+      selectedDoctor.value.id,
+      inputFormModel.value[1],
+      inputFormModel.value[2]
+    )
+    myModal.show()
+  })
+  document.getElementById('successButton').addEventListener('click', async () => {
+    myModal.hide()
+  })
 }
 
 watch(inputFormModel.value, async (newValue) => {
@@ -109,7 +160,7 @@ watch(inputFormModel.value, async (newValue) => {
           inputClass: 'form-control',
           divClass: 'mb-4 form-floating',
           list: 'Test',
-          datalist: ['No doctor Right now']
+          datalist: useDoctorStore.doctorStoresGetter.map((doctor) => doctor.name)
         }
       ]
       inputFormFloatingInput.value[0].inputClass = 'form-control is-invalid'
@@ -121,7 +172,7 @@ watch(inputFormModel.value, async (newValue) => {
     if (newValue[1]) {
       const date = new Date(newValue[1])
       const appointmentHour = date.getHours()
-      const appointmentDay = date.getDay() - 1 < 0 ? 6 : date.getDay()
+      const appointmentDay = date.getDay() - 1 < 0 ? 6 : date.getDay() - 1
       let dayCheck = false
       let dayArray = 0
 
@@ -163,7 +214,8 @@ watch(inputFormModel.value, async (newValue) => {
       value: '',
       label: 'Day select',
       inputClass: 'form-control',
-      divClass: 'mb-4 form-floating'
+      divClass: 'mb-4 form-floating',
+      min: new Date().toISOString().slice(0, new Date().toISOString().lastIndexOf(':'))
     }
     inputFormFloatingInput.value[2] = {
       id: 'descriptionInput',
@@ -185,10 +237,6 @@ onBeforeMount(async () => {
   try {
     const useDoctorStore = doctorStore()
 
-    if (route.params.doctorId) {
-      useDoctorStore.getDoctorProfile(route.params.doctorId)
-    }
-
     const res = await useDoctorStore.getDoctor(1, null, null, 9999)
 
     if (!res) {
@@ -196,6 +244,13 @@ onBeforeMount(async () => {
         (doctor) => doctor.name
       )
     }
+
+    if (route.name === 'Edit Appointment Page') {
+      document.getElementById('appointmentTitle').innerHTML = 'Edit appointment Page'
+      return
+    }
+
+    document.getElementById('appointmentTitle').innerHTML = 'Create appointment Page'
   } catch (error) {}
 })
 

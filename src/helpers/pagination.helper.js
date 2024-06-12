@@ -39,6 +39,6 @@ export function createPagination(pagination) {
     paginationObject[paginationObject.length - 1].listClass = 'page-item disabled'
   }
 
-  console.log(paginationObject);
+  console.log(paginationObject)
   return paginationObject
 }

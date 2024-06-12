@@ -33,33 +33,33 @@ const infoConfig = reactive({
 })
 
 const profilePageConfig = [
-      {
-        linkHref: '#',
-        linkClass: 'nav-link',
-        linkText: 'Home',
-        listClass: 'nav-item',
-        linkAriaCurrent: 'page'
-      },
-      {
-        linkHref: '/appointment',
-        linkClass: 'nav-link',
-        linkText: 'New Appointment',
-        listClass: 'nav-item'
-      },
-      {
-        linkHref: '/history',
-        linkClass: 'nav-link',
-        linkText: 'View/Edit Appointment',
-        listClass: 'nav-item'
-      },
-      {
-        linkHref: '/',
-        linkClass: 'nav-link',
-        linkText: 'Logout',
-        listClass: 'nav-item',
-        linkId: 'logoutlink'
-      }
-    ]
+  {
+    linkHref: '/home',
+    linkClass: 'nav-link',
+    linkText: 'Home',
+    listClass: 'nav-item',
+    linkAriaCurrent: 'page'
+  },
+  {
+    linkHref: '/appointment',
+    linkClass: 'nav-link',
+    linkText: 'New Appointment',
+    listClass: 'nav-item'
+  },
+  {
+    linkHref: '/history',
+    linkClass: 'nav-link',
+    linkText: 'View/Edit Appointment',
+    listClass: 'nav-item'
+  },
+  {
+    linkHref: '/',
+    linkClass: 'nav-link',
+    linkText: 'Logout',
+    listClass: 'nav-item',
+    linkId: 'logoutlink'
+  }
+]
 
 onMounted(async () => {
   try {

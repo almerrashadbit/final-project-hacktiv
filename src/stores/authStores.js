@@ -32,7 +32,7 @@ export const authStore = defineStore('auth', () => {
         saveToken(config.idTokenKey, tokenFromAuth.value)
         return modalSuccess('Login Success', { path: '/home', query: { pageId: 1 } })
       }
-      return modalNotSuccess(res)
+      return modalNotSuccess(res.statusText)
     } catch (error) {
       return modalNotSuccess(error.response.data.error)
     }

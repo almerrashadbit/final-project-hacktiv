@@ -12,6 +12,7 @@
         :floating-label-class="inputt.labelClass"
         :floating-input-list="inputt.list"
         :floating-input-select-list="inputt.selectList"
+        :floating-input-min="inputt.min"
         v-model="inputFormValue[index]"
         >{{ inputt.label }}
       </floatingInputMolecule>
