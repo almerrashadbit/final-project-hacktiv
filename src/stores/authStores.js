@@ -25,7 +25,6 @@ export const authStore = defineStore('auth', () => {
   async function login(body, rememberMe) {
     try {
       const res = await POST(config.baseURL, 'LOGIN', body)
-      console.log(res)
       saveToken(config.rememberMeKey, rememberMe)
       if (res.status === 200) {
         tokenFromAuth.value = res.data.token
@@ -41,7 +40,6 @@ export const authStore = defineStore('auth', () => {
   async function register(body) {
     try {
       const res = await POST(config.baseURL, 'REGISTER', body)
-      console.log(res)
       if (res.status === 201) {
         return modalSuccess('Register success, please login again', { path: '/' })
       }

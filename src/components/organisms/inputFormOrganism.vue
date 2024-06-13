@@ -78,9 +78,7 @@ async function handleSubmit() {
 
     const res = await useAuthStore.login(params)
 
-    console.log(res)
   } catch (error) {
-    console.log(error)
   }
 }
 </script>

@@ -50,6 +50,5 @@ export async function appointmentToAccordion(appointmentArray) {
 
     return appointmentConfig
   } catch (error) {
-    console.log(error)
   }
 }

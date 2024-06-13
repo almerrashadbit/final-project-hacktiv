@@ -101,7 +101,6 @@ async function getDoctorData(page, nameQuery = null, specialityQuery = null) {
     if (!res) {
       unorderedPagination.value = useDoctorStore.paginationObjectGetter
       cardList.value = doctorToCard(useDoctorStore.doctorStoresGetter)
-      console.log(cardList.value)
       return null
     }
     const myModal = new Modal(document.getElementById('staticBackdrop'))

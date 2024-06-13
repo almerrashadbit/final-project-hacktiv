@@ -36,7 +36,6 @@ export const appointmentStore = defineStore('appointment', () => {
       const token = getToken(config.idTokenKey)
       const res = await GET(config.baseURL, 'APPOINTMENT', null, token)
       if (res.status === 200) {
-        console.log(res, 'asfadfc')
         return res.data
       }
     } catch (error) {}
@@ -44,7 +43,6 @@ export const appointmentStore = defineStore('appointment', () => {
 
   async function editAppointment(doctorId, time, description, appointmentId) {
     try {
-      console.log('MASUKKK')
       const token = getToken(config.idTokenKey)
       const body = {
         doctorId,
